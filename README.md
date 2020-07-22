@@ -1,2 +1,2 @@
 # ukesongbook
-A songbook for ukulele with slovak, czech and international songs.
+A songbook for ukulele with Slovak, Czech and international songs.

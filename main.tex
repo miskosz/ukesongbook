@@ -1,0 +1,835 @@
+% !TeX program = xelatex
+
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage[czech]{babel}
+
+\usepackage[top=2cm,left=2cm,bottom=2cm,right=2cm,a4paper]{geometry}
+%\usepackage{guitar}                         % chords above the words
+\usepackage{gchords}                        % chord diagrams
+\usepackage{verbatim}                       % support for comment and verbatim
+\usepackage{graphicx}                       % support for images
+\usepackage[hidelinks]{hyperref}            % hyperlink support
+\usepackage{etoolbox}                       % conditional statement support
+\usepackage{tikz}
+\usepackage{xfrac}                          % nice fractions for meters
+\usepackage{fontspec}                       % for lilyglyphs
+\usepackage{lilyglyphs}                     % music note symbols
+\usepackage{wrapfig}                        % chords on page side
+\usepackage{pbox}
+\usepackage{tcolorbox}
+
+\input{ukulelechords.tex}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SONG
+
+% Song environment
+\newenvironment{song}{%
+	\pagebreak%
+	\parindent0pt%
+    \Large%
+}{%
+}%
+
+% Chorusbox environment. Makes a box around text, used mostly for choruses.
+\newsavebox{\chbox}
+\newlength{\chboxsep}
+\setlength{\chboxsep}{1.5ex}
+\newlength{\savedfboxsep}
+\newenvironment{chorusbox}{%
+    \hspace{-\chboxsep}%
+    \begin{lrbox}{\chbox}%
+    \begin{minipage}{\linewidth-3ex}%
+}{%
+    \end{minipage}%
+    \end{lrbox}%
+    \setlength{\savedfboxsep}{\fboxsep}%
+    \setlength{\fboxsep}{\chboxsep}%
+    \fbox{\usebox{\chbox}}%
+    \setlength{\fboxsep}{\savedfboxsep}%
+}
+\newenvironment{chorusboxwide}{%
+    \hspace{-\chboxsep}%
+    \begin{lrbox}{\chbox}%
+    \begin{minipage}{\linewidth}%
+}{%
+    \end{minipage}%
+    \end{lrbox}%
+    \setlength{\savedfboxsep}{\fboxsep}%
+    \setlength{\fboxsep}{\chboxsep}%
+    \fbox{\usebox{\chbox}}%
+    \setlength{\fboxsep}{\savedfboxsep}%
+}%
+
+% Chordbox environment. Places chords in a float at the right side of the page.
+\newenvironment{chordbox}{%
+    \wrapfloat{minipage}{r}{7.5ex}%
+}{%
+    \endwrapfloat%
+}%
+
+% Song header.
+% Params: title, author
+\newcommand{\SongTitle}[2]{%
+	\begin{center}
+	\Huge{#1} \Large{(#2)}\par%
+	\end{center}%
+    \addcontentsline{toc}{subsection}{#1 (#2)}%
+}
+% Params: capo_position
+\newcommand{\Capo}[1]{\textit{Original: Capo #1}\par}
+
+% Chord macro
+\newcommand{\ch}[1]{\textbf{(#1)}}
+\newcommand{\rep}[1]{\hspace{2pt}x#1}
+% \newcommand{\rep}[1]{\textsuperscript{\textbf#1}}
+% \newcommand{\beat}{\hspace{-1pt}/}
+% \newcommand{\beat}{\textquotesingle}
+% \newcommand{\beat}{\textsuperscript{\textbf{\sfrac{1}{2}}}}
+
+
+\newcommand{\beatsymbol}{\textquotesingle}
+% \newcommand{\beatsymbol}{\hspace{-1pt}/}
+
+\newcount\myloopcounter
+\newcommand{\beats}[1]{%
+  \myloopcounter0% initialize the loop counter
+  \loop\ifnum\myloopcounter < #1 % Test if the loop counter is < #1
+  \beatsymbol% <<<< the thing to repeat
+  \advance\myloopcounter by 1 % 
+  \repeat % start again
+}
+\newcommand{\beat}{\beats1}
+
+\newcommand{\beatsperchord}[1]{(X) = (X\beats#1)}
+
+
+% Playing note
+\newcommand{\note}[1]{\textbf{[#1]}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% STRUMMING
+
+\newcommand{\rang}{\begin{picture}(5,7)
+\put(1.1,2.5){\rotatebox{135}{\line(1,0){3.0}}}
+\put(1.1,2.5){\rotatebox{225}{\line(1,0){3.0}}}
+\end{picture}}
+\newcommand{\Miss}{\cdot}
+\newcommand{\Down}{\downarrow}
+\newcommand{\AccentDown}{\stackrel{\rang}{\downarrow}}
+\newcommand{\ChuckDown}{\stackrel{\scriptscriptstyle\times}{\downarrow}}
+\newcommand{\StaccatoDown}{\stackrel{\cdot}{\downarrow}}
+\newcommand{\Up}{\uparrow}
+\newcommand{\AccentUp}{\stackrel{\rang}{\uparrow}}
+\newcommand{\ChuckUp}{\stackrel{\scriptscriptstyle\times}{\uparrow}}
+\newcommand{\StaccatoUp}{\stackrel{\cdot}{\uparrow}}
+\newcommand{\Separator}{\bigg|}
+
+\begin{document}%
+	
+% Set default font.
+\fontfamily{lmss}\selectfont
+
+% Title page.
+\title{
+	\normalsize \textsc{Introduction to Computer Vision} \\
+	\vspace{20\baselineskip}
+	\LARGE \textbf{\uppercase{TODO Ukulele Spevník}} \\
+	\normalsize \today \vspace*{15\baselineskip}
+}
+
+\date{}
+
+\author{
+	Your Names \\ 
+	Colorado School of Mines \\ }
+
+\maketitle
+\newpage
+
+% Table of contents.
+\tableofcontents
+
+\begin{song}
+
+\SongTitle{Jedu takhle tábořit}{Michal Szabados}
+
+\bigskip
+
+(X) = (X//)
+\medskip
+\beatsperchord2
+\medskip
+
+\ch{Am\rep2}Jedu takhle tábořit \ch{E7}Škodou 100 na \ch{Am}Oravu \par
+\ch{Am\rep2}Spěchám, proto riskuji, \ch{E7}projíždím přes \ch{Am}Moravu \par
+\ch{G7}Řádí tam to \ch{C}strašidlo, \ch{G7}vystupuje \ch{C/}z ba\ch{E7/}žin \par
+\ch{Am\rep2}Žere hlavně Pražáky, \ch{E7}jmenuje se \ch{Am/}Jo\ch{G7/}žin \par
+
+\bigskip
+
+\ch{Am}\textsuperscript{\textbf2}Jedu takhle tábořit \ch{E7}Škodou 100 na \ch{Am}Oravu \par
+\ch{Am}\textsuperscript{\textbf2}Spěchám, proto riskuji, \ch{E7}projíždím přes \ch{Am}Moravu \par
+\ch{G7}Řádí tam to \ch{C}strašidlo, \ch{G7}vystupuje \ch{C/}z ba\ch{E7/}žin \par
+\ch{Am}\textsuperscript{\textbf2}Žere hlavně Pražáky, \ch{E7}jmenuje se \ch{Am/}Jo\ch{G7/}žin \par
+
+\bigskip
+
+\ch{Am\textsuperscript{2}}Jedu takhle tábořit \ch{E7}Škodou 100 na \ch{Am}Oravu \par
+\ch{Am\textsuperscript{x2}}Spěchám, proto riskuji, \ch{E7}projíždím přes \ch{Am}Moravu \par
+\ch{G7}Řádí tam to \ch{C}strašidlo, \ch{G7}vystupuje
+\ch{C\textsuperscript{\sfrac{1}{2}}}z ba\ch{E7\textsuperscript{\sfrac{1}{2}}}žin \par
+\ch{Am\textsuperscript{x2}}Žere hlavně Pražáky, \ch{E7}jmenuje se
+\ch{Am\textsuperscript{\sfrac{1}{2}}}Jo\ch{G7\textsuperscript{\sfrac{1}{2}}}žin \par
+
+\bigskip
+
+(X) = (X////)
+\medskip
+
+\ch{Am}Jedu takhle tábořit \ch{E7//}Škodou 100 na \ch{Am//}Oravu \par
+\ch{Am}Spěchám, proto riskuji, \ch{E7//}projíždím přes \ch{Am//}Moravu \par
+\ch{G7//}Řádí tam to \ch{C//}strašidlo, \ch{G7//}vystupuje \ch{C/}z ba\ch{E7/}žin \par
+\ch{Am}Žere hlavně Pražáky, \ch{E7//}jmenuje se \ch{Am/}Jo\ch{G7/}žin \par
+
+\bigskip
+
+\ch{Am}Jedu takhle tábořit \ch{E7\halfNote}Škodou 100 na \ch{Am\halfNote}Oravu \par
+\ch{Am}Spěchám, proto riskuji, \ch{E7\halfNote}projíždím přes \ch{Am\halfNote}Moravu \par
+\ch{G7\halfNote}Řádí tam to \ch{C\halfNote}strašidlo, \ch{G7\halfNote}vystupuje
+\ch{C\quarterNote}z ba\ch{E7\quarterNote}žin \par
+\ch{Am}Žere hlavně Pražáky, \ch{E7\halfNote}jmenuje se
+\ch{Am\quarterNote}Jo\ch{G7\quarterNote}žin \par
+
+\bigskip
+
+\ch{E7//} \par
+\ch{E7||} \par
+\ch{E7\textquotesingle\textquotesingle} \par
+\ch{E7''} \par
+
+\bigskip
+
+\ch{Am}Jedu takhle tábořit \ch{E7\textquotesingle\textquotesingle}Škodou 100 na
+\ch{Am\textquotesingle\textquotesingle}Oravu \par
+
+\end{song}
+
+
+% \begin{song}
+
+% \SongTitle{Skyfall}{Adele}
+
+% \beatsperchord4 \quad
+% \Capo{3}
+
+% \textit{Verse:} $\AccentDown\Miss\Miss\Miss\AccentDown\Miss\Down\Up$ \quad
+% \textit{Chorus:} $\Down\Miss\Down\AccentUp\Miss\Up\Down\Up$
+
+% \bigskip
+
+% This \ch{Am}is the end \ch{F} \ch{D} ... \ch{Dm}Hold your breath and \par
+% \ch{Am}Count to \ch{F}ten \ch{D} ... \ch{Dm}Feel the earth \par
+% \ch{Am}Move and \ch{F}then \ch{D} ... \ch{Dm}Hear my heart \par
+% \ch{Dm6\rep2}burst a\ch{E7sus4}gain \ch{E7} \par
+
+% \bigskip
+
+% [Zmazať?]
+
+% \end{song}
+
+
+\begin{song}
+
+\SongTitle{House of the Rising Sun}{The Animals, abridged?}
+
+\beatsperchord6
+
+\textit{Chord duration: $\mathbf{\sfrac{6}{8}}$}
+
+\textit{Strum:} $\AccentDown\Miss\Down\Up\Down\Up\ \AccentDown\Miss\Down\Up\Down\Up$
+
+\large
+
+\ukechord{Am}
+\ukechord{C}
+\ukechord{D}
+\ukechord{F}
+\ukechord{E7}
+\ukechord{F7alt}
+\ukechord{Dm}
+
+\bigskip
+
+\ch{Am} \ch{C} \ch{D} \ch{F} \par
+\ch{Am} \ch{E7} \ch{Am} \ch{E7} \par
+
+\bigskip
+
+There \ch{Am}is a \ch{C}house in \ch{D}New Orleans \ch{F} \par
+They \ch{Am}call the \ch{C}Rising \ch{E7}Sun \ch{E7} \par
+And it’s \ch{Am}been the \ch{C}ruin of \ch{D}many a poor boy \ch{F} \par
+And \ch{Am}God I \ch{E7}know I’m \par
+\ch{Am}One \ch{C} \ch{D} \ch{F7} \par
+\ch{Am} \ch{E7} \ch{Am} \ch{E7} \par
+
+\bigskip
+
+My \ch{Am}mother \ch{C}was a \ch{D}tailor \ch{F7} \par
+She \ch{Am}sewed my \ch{C}new blue \ch{E7}jeans \ch{E7} \par
+My \ch{Am}father \ch{C}was a \ch{D}gambling \ch{F}man \par
+\ch{Am}Down in \ch{E7}New \par
+Or\ch{Am}leans \ch{C} \ch{D} \ch{F7} \par
+\ch{Am} \ch{E7} \ch{Am} \ch{E7} \par
+
+\bigskip
+
+Oh \ch{Am}mother \ch{C} tell your chil\ch{D}dren \ch{F7} \par
+Not to \ch{Am}do what \ch{C}I have \ch{E7}done \ch{E7} \par
+\ch{Am}Spend your \ch{C}lives in \ch{D}sin and mise\ch{F}ry \par
+In the \ch{Am}house of the \ch{E7}Rising \par
+\ch{Am}Sun \ch{C} \ch{D} \ch{F7} \par
+\ch{Am} \ch{E7} \ch{Am} \ch{E7} \par
+
+\bigskip
+
+Well I got \ch{Am}one foot \ch{C} on the \ch{D}platform \ch{F7} \par
+And the \ch{Am}other \ch{C}foot on the \ch{E7}train \ch{E7} \par
+I’m \ch{Am}going \ch{C}back to \ch{D}New Orleans \ch{F7} \par
+To \ch{Am}wear that \ch{E7}ball and \par
+\ch{Am}chain \ch{C} \ch{D} \ch{F7} \par
+\ch{Am} \ch{E7} \ch{Am} \ch{E7} \par
+
+\bigskip
+
+There \ch{Am}is a \ch{C}house in \ch{D}New Orleans \ch{F7} \par
+They \ch{Am}call the \ch{C}Rising \ch{E7}Sun \ch{E7} \par
+And it’s \ch{Am}been the \ch{C}ruin of \ch{D}many a poor \ch{F7}boy \par
+And \ch{Am}god I \ch{E7}know I’m \par
+\ch{Am}one \ch{C} \ch{D} \ch{F7} \par
+\ch{Am} \ch{E7} \ch{Am} \ch{Dm} \par
+\note{slow down gradually} \par
+\ch{Am} \ch{Dm} \ch{Am} \ch{Dm} \par
+\ch{Am} \ch{Dm} \ch{Am} \ch{Dm} \par
+\ch{Am – single strum} \par
+
+\end{song}
+
+
+\begin{song}
+
+\SongTitle{Don’t Stop Me Now}{Queen}
+
+\beatsperchord4
+
+\large
+
+\begin{chordbox}
+\ukechord{Bb}\par
+\ukechord{D}\par
+\ukechord{Dm}\par
+\ukechord{Eb}\par
+\ukechord{F7}\par
+\ukechord{Gm}\par
+\ukechord{Gm7}\par
+\end{chordbox}
+
+\large
+
+\bigskip
+
+To\ch{F}night... I’m gonna have my\ch{Am}self... a real \ch{Dm}good time \par
+I feel a\ch{Gm}li-i-i-\ch{C}ive \par
+And the \ch{F}world... I’ll \ch{F7}turn it inside \ch{Bb}out, yeah \par
+\ch{Gm7}Floating around in \ch{D}ecstasy... so \par
+\ch{Gm\beat\beat}Don’t \ch{*F\beat}stop \ch{*C\beat}me \ch{Gm}now \par
+\ch{Gm\beat\beat}Don’t \ch{*F\beat}stop \ch{*C\beat}me cos I’m \ch{Gm}having a good time \par
+\ch{C}Having a good time \par
+
+\bigskip
+
+I’m a \ch{F}shooting star leaping through the \ch{Am}sky... like a \par
+Ti\ch{Dm}ger... defying the \ch{Gm}laws of gravi\ch{C}ty \par
+I’m a \ch{F}racing car... passing \ch{Am}by... like Lady Go\ch{Dm}diva \par
+I’m gonna \ch{Gm}go go go \ch{C}go... there’s no stopping \par
+
+\bigskip
+
+\begin{chorusbox}
+\note{pre-chorus and chorus} \par \smallskip
+\ch{F}(me...) I’m \ch{F7}burning through the \ch{Bb}sky, yeah \par
+Two \ch{Gm7}hundred degrees that’s why they \ch{D}call me Mr Fahren\ch{Gm}heit \par
+I’m \ch{D}travelling at the speed of \ch{Gm}light \par
+I wanna make a \ch{Gm}supersonic man out of \ch{C}you
+
+\bigskip
+
+\ch{F\beat\beat}Don’t \ch{*Gm\beat}stop \ch{*Am\beat}me \ch{Dm}now \par
+I’m having such a \ch{Gm}good time, I’m \ch{C}having a ball \par
+\ch{F\beat\beat}Don’t \ch{*Gm\beat}stop \ch{*Am\beat}me \ch{Dm}now \par
+If you wanna have a \ch{Gm}good time just \ch{D}give me a call \par
+\ch{Gm\beat\beat}Don’t \ch{*F\beat}stop \ch{*C\beat}me \ch{Gm}now \par
+\hspace{120pt} \textit{(Cos I’m \ch{Gm}having a good time)} \par
+\ch{Gm\beat\beat}Don’t \ch{*F\beat}stop \ch{*C\beat}me \ch{Gm}now \par
+\hspace{120pt} \textit{(Yes I’m \ch{Gm}having a good time)} \par
+I \ch{C}don’t want to stop at \ch{Eb\rep2}a-a-all
+\end{chorusbox}
+
+\bigskip
+
+Yeah I’m a \ch{F}rocket ship on my way to \ch{Am}Mars \par
+On a col\ch{Dm}lision course... I’m a \ch{Gm}satellite... I’m \ch{C}out of control \par
+I’m a \ch{F}sex machine ready to re\ch{Am}load \par
+Like an \ch{Dm}atom bomb... about to \ch{Gm}oh-oh-oh-\ch{C}oh \par
+
+\bigskip
+
+Ex\ch{F}plode... I’m \ch{F7}burning through the \ch{Bb}sky, yeah \par
+Two \ch{Gm7}hundred degrees that’s why they \ch{D}call me Mr Fahren\ch{Gm}heit \par
+I’m \ch{D}travelling at the speed of \ch{Gm}light \par
+I wanna make a \ch{Gm}supersonic woman of \ch{C stop}you \par
+
+\bigskip
+
+\note{no chords} Don’t stop me, don’t stop me, don’t stop me (hey hey hey) \par
+Don’t stop me, don’t stop me (ooh, ooh, ooh) \par
+Don’t stop me, don’t stop me (have a good time, good time) \par
+Don’t stop me, don’t stop me, ohhhh \par
+\ch{F} \ch{Am} \ch{Dm} \ch{Gm} \ch{C} x2 \par
+
+\bigskip
+
+\note{pre-chorus and chorus} \par
+
+\bigskip
+
+\ch{F} La da da da \ch{Am}dah da da da \ch{Dm}haa ha da \ch{Gm}da ha ha haa \ch{C} \par
+
+\end{song}
+
+
+\begin{song}
+
+\SongTitle{California Dreaming}{The Mamas \& The Papas}
+
+\beatsperchord2
+
+\textit{Chord duration: $\mathbf{\sfrac{2}{4}}$}
+
+\textit{Strumming:} $\mathbf{\sfrac{16}{4}} =$ $\Down\Miss\Down\Miss\Separator\Down\Up\Down\Separator\Up\Miss\Up\Down\Up\Separator\Down\Miss\Down\Miss$
+
+\large
+
+\begin{chordbox}
+\ukechord{Dm}\par
+\ukechord{C}\par
+\ukechord{Bb}\par
+\ukechord{A7sus4}\par
+\ukechord{A7}\par
+\ukechord{F}\par
+\ukechord{Asus2}\par
+\end{chordbox}
+
+\Large
+
+\bigskip
+
+All the leaves are \ch{Dm}brown \ch{C} \ch{*Bb} \par
+And the \ch{C}sky is \ch{A7sus4\rep2}grey \ch{*A7\rep2} \par
+I've been for a \ch{F}walk \ch{A7} \ch{*Dm}  \par
+On a \ch{Bb}winter's \ch{A7sus4\rep2}day \ch{*A7\rep2} \par
+I’d be safe and \ch{Dm}warm \ch{C} \ch{*Bb} \par
+If I \ch{C}was in L\ch{A7sus4\rep2}A \ch{*A7\rep2} \par
+California \ch{Dm}dreamin’ \ch{C} \ch{*Bb} \par
+On \ch{C}such a winter's \ch{A7sus4\rep2}day \ch{*A7\rep2} \par
+
+\bigskip
+
+Stopped into a \ch{Dm}church \ch{C} \ch{*Bb} \par
+I passed a\ch{C}long the \ch{A7sus4\rep2}way \ch{*A7\rep2} \par
+Well I got down on my \ch{F}knees \ch{A7} \ch{*Dm} \par
+And I pre\ch{Bb}tend to \ch{A7sus4\rep2}pray \ch{*A7\rep2} \par
+You know the preacher likes the \ch{Dm}cold \ch{C} \ch{*Bb} \par
+He knows I'm \ch{C}gonna \ch{A7sus4\rep2}stay \ch{*A7\rep2} \par
+California \ch{Dm}dreamin’ \ch{C} \ch{*Bb} \par
+On \ch{C}such a winter's \ch{A7sus4\rep2}day \ch{*A7\rep2} \par
+
+\bigskip
+
+% TODO: Bold textbar?
+\ch{Dm\rep2} \ch{Dm} \ch{Asus2} \textbar\ \ch{Dm\rep2} \ch{Dm} \ch{A7sus4} \par
+\ch{F} \ch{A7} \ch{*Dm} \ch{Bb} \textbar\ \ch{A7sus4\rep2} \ch{*A7\rep2} \par
+\ch{Dm} \ch{*C} \ch{Bb} \ch{*C} \textbar\ \ch{A7sus4\rep2} \ch{*A7\rep2} x2 \par
+
+\bigskip
+
+All the leaves are \ch{Dm}brown \ch{C} \ch{*Bb} \par
+And the \ch{C}sky is \ch{A7sus4\rep2}grey \ch{*A7\rep2} \par
+I've been for a \ch{F}walk \ch{A7} \ch{*Dm} \par
+On a \ch{Bb}winter's \ch{A7sus4\rep2}day \ch{*A7\rep2} \par
+If I didn’t \ch{Dm}tell her \ch{C} \ch{*Bb} \par
+I could \ch{C}leave to\ch{A7sus4\rep2}day \ch{*A7\rep2} \par
+
+\bigskip
+
+California \ch{Dm}dreamin’ \ch{C} \ch{*Bb} on \ch{C}such a winter's \par
+\ch{Dm} California dreamin’ \ch{C} \ch{*Bb} on \ch{C}such a winter's \par
+\ch{Dm} California dreamin’ \ch{C} \ch{*Bb} on \ch{C}such a winter's \par
+\ch{Bb\rep4} day \par
+\ch{Dm – single strum} \par
+
+\end{song}
+
+
+\begin{song}
+
+\SongTitle{Po schodoch}{Richard Müller, upravené}
+
+\beatsperchord2
+
+\Capo{3}
+
+\textit{Strum:} $\Down\Miss\AccentDown\Up\ \Down\Miss\AccentDown\Up$
+
+\Large
+
+\ukechord{Dm}
+\ukechord{C}
+\ukechord{Bb}
+\ukechord{Am}
+\ukechord{A}
+
+\Large
+
+\bigskip
+
+\ch{Dm\rep2}Výťah opäť nechodí tak \ch{C\rep2}zdolať 13 poschodí \par
+\ch{Bb}zostáva mi \ch{C}znova po svo\ch{Dm\rep2}jich \par
+Na \ch{Dm\rep2}schodoch čosi šramotí a \ch{C\rep2}neón kde tu nesvieti \par
+\ch{Bb}Ešte že sa \ch{C}po tme nebo\ch{Dm\rep2}jím \par
+
+\bigskip
+
+\ch{Dm\rep2}Počuť hlasné stereo aj \ch{C\rep2}výstrahy pred neverou \par
+\ch{Bb}Ktosi čosi \ch{C}vŕta v pane\ch{Dm\rep2}loch \par
+\ch{Dm\rep2}Tatramatky ródeo sa \ch{C\rep2}mieša kde tu s operou \par
+\ch{Bb}Všetko počuť \ch{C}cestou po scho\ch{Dm\rep2}doch \par
+
+\bigskip
+
+Cestou \ch{Dm}po schodoch, \ch{Am}po schodoch \ch{Bb}poznávam \ch{C}poschodia \par
+Poznám \ch{Dm}po schodoch, \ch{Am}po zvukoch \ch{Bb}čo sme to \ch{A\beat}za ľu\ch{*Dm\beat}dia \par
+Cestou \ch{Dm}po schodoch, \ch{Am}po schodoch \ch{Bb}poznávam \ch{C}poschodia \par
+Poznám \ch{Dm}po schodoch, \ch{Am}po zvukoch \ch{Bb}čo sme to \ch{A\beat}za ľu\ch{*Dm\beat}dia \par
+
+\bigskip
+
+\ch{Dm\rep2}Štekot smutnej kólie za \ch{C\rep2}premárnené prémie \par
+\ch{Bb}Vyhráža sa \ch{C}manžel rozvo\ch{Dm\rep2}dom \par
+\ch{Dm\rep2}Disko tenis árie kritika tele\ch{C\rep2}vízie \par
+\ch{Bb}Oddnes chodím \ch{C}iba po scho\ch{Dm\rep2}doch \par
+
+\bigskip
+
+Cestou \ch{Dm}po schodoch, \ch{Am}po schodoch \ch{Bb}poznávam \ch{C}poschodia \par
+Poznám \ch{Dm}po schodoch, \ch{Am}po zvukoch \ch{Bb}čo sme to \ch{A\beat}za ľu\ch{*Dm\beat}dia \par
+Cestou \ch{Dm}po schodoch, \ch{Am}po schodoch \ch{Bb}poznávam \ch{C}poschodia \par
+Poznám \ch{Dm}po schodoch, \ch{Am}po zvukoch \ch{Bb}čo sme to \ch{A\beat}za ľu\ch{*Dm\beat}dia \par
+
+\end{song}
+
+
+\begin{song}
+
+\SongTitle{Jožin z bažin}{Ivan Mládek}
+
+\beatsperchord2
+
+\textit{Chord duration: $\mathbf{\sfrac{2}{4}}$} \quad
+\textit{Original: +2}
+
+\textit{Strum:} $\Down\Miss\AccentDown\Up\ \Down\Miss\AccentDown\Up$
+
+\large
+
+\begin{chordbox}
+\ukechord{A7}\par
+\ukechord{Bb}\par
+\ukechord{C7}\par
+\ukechord{Dm}\par
+\ukechord{F7alt}\par
+\ukechord{Fdim}\par
+\end{chordbox}
+
+\Large
+
+\bigskip
+
+\ch{Dm\rep4} \textit{(pá pá pá rap pá \rep2)} \par
+\ch{Dm\rep2}Jedu takhle tábořit \ch{A7}Škodou 100 na \ch{Dm}Oravu \par
+\ch{Dm\rep2}Spěchám, proto riskuji, \ch{A7}projíždím přes \ch{Dm}Moravu \par
+\ch{C7}Řádí tam to \ch{F}strašidlo, \ch{C7}vystupuje \ch{F\beat}z ba\ch{A7\beat}žin \par
+\ch{Dm\rep2}Žere hlavně Pražáky, \ch{A7}jmenuje se \ch{Dm\beat}Jo\ch{C7\beat}žin \par
+
+\bigskip
+
+\begin{chorusbox}
+\note{refrén} \par
+\ch{F\rep2}Jožin z bažin \ch{F\beat}močá\ch{Fdim\beat}lem se \ch{C7}plíží \par
+\ch{C7\rep3}Jožin z bažin k vesnici se \ch{F}blíží \par
+\ch{F\rep2}Jožin z bažin \ch{F\beat}už si \ch{Fdim\beat}zuby \ch{C7}brousí \par
+\ch{C7\rep3}Jožin z bažin kouše, saje, \ch{F}rdousí \par
+\ch{Bb}Na Jožina z \ch{F}bažin, \ch{C}koho by to napa\ch{F\beat}dlo \ch{F7\beat} \par
+\ch{Bb}Platí jen a \ch{F}pouze \ch{C7}práškovací leta\ch{F\beat}dlo \ch{A7\beat} \par
+\end{chorusbox}
+
+\bigskip
+
+\ch{Dm\rep4} \par
+\ch{Dm\rep2}Projížděl jsem dědinou \ch{A7}cestou na Vi\ch{Dm}zovice \par
+\ch{Dm\rep2}Přivítal mě předseda, \ch{A7}řek' mi u sli\ch{Dm}vovice: \par
+\ch{C7}"Živého či \ch{F}mrtvého \ch{C7}Jožina kdo \ch{F\beat}přive\ch{A7\beat}de, \par
+\ch{Dm\rep2}tomu já dám za ženu \ch{A7}dceru a půl \ch{Dm\beat}JZ\ch{C7\beat}D!" \par
+
+
+\bigskip
+
+\note{refrén}
+
+\bigskip
+
+\ch{Dm\rep4} \par
+\ch{Dm\rep2}Říkám: "Dej mi, předsedo, \ch{A7}letadlo a \ch{Dm}prášek \par
+\ch{Dm\rep2}Jožina ti přivedu, \ch{A7}nevidím v tom \ch{Dm}háček" \par
+\ch{C7}Předseda mi \ch{F}vyhověl, \ch{C7}ráno jsem se \ch{F\beat}vzne\ch{A7\beat}sl \par
+\ch{Dm\rep2}Na Jožina z letadla \ch{A7}prášek pěkně \ch{Dm\beat}kle\ch{C7\beat}sl \par
+
+\bigskip
+
+\ch{F\rep2}Jožin z bažin \ch{F\beat}už je \ch{Fdim\beat}celý \ch{C7}bílý \par
+\ch{C7\rep3}Jožin z bažin z močálu ven \ch{F}pílí \par
+\ch{F\rep2}Jožin z bažin \ch{F\beat}dostal \ch{Fdim\beat}se na \ch{C7}kámen \par
+\ch{C7\rep3}Jožin z bažin – tady je s ním \ch{F}ámen! \par
+\ch{Bb}Jožina jsem \ch{F}dostal, \ch{C}už ho držím, joho\ch{F\beat}ho \ch{F7\beat} \par
+\ch{Bb}dobré každé \ch{F}lóve, \ch{C7}prodám já ho do ZO\ch{F}O \par
+
+\bigskip
+\note{outro} \par
+\ch{Bb} \ch{F} \ch{C} \ch{F\beat} \ch{F7\beat} \par
+\ch{Bb} \ch{F} \ch{C7} \ch{F-C7-F} \par
+
+\end{song}
+
+
+\begin{song}
+
+\SongTitle{Nosorožec}{Karel Plíhal}
+
+\beatsperchord2
+
+\textit{Chord duration: $\mathbf{\sfrac{2}{4}}$} \quad
+\textit{Original: +3}
+
+\textit{Strum:} $\Down\Miss\AccentDown\Up\ \Down\Miss\AccentDown\Up$
+
+\Large
+
+\ukechord{Am}
+\ukechord{Dm}
+\ukechord{Dsharpdim}
+\ukechord{E7}
+
+\bigskip
+
+\ch{Am\rep2}Přivedl jsem domů Božce \ch{Dm}nádhernýho \ch{Am}nosorožce, \par
+\ch{Dm}originál \ch{Am}tlustokožce, \ch{D\#dim}koupil jsem ho \ch{E7}v hospodě. \par
+\ch{Am\rep2}Za dva rumy a dvě vodky \ch{Dm}připadal mi \ch{Am}velmi krotký, \par
+\ch{Dm}pošlapal mi \ch{Am}polobotky, \ch{E7}ale jinak \ch{Am}v pohodě. \par
+
+\bigskip
+
+\ch{Dm}Vznikly menší \ch{Am}potíže \ch{E7}při nástupu \ch{Am}do zdviže, \par
+\ch{Dm}při výstupu \ch{Am}ze zdviže \ch{D\#dim}už nám to šlo \ch{E7}lehce. \par
+\ch{Am\rep2}Vznikly větší potíže, \ch{Dm}když Božena \ch{Am}v negližé, \par
+\ch{Dm}když Božena \ch{Am}v negližé \ch{D\#dim}řvala, že ho \ch{E7}nechce. \par
+
+\bigskip
+
+\ch{Am\rep2}Marně jsem se snažil Božce \ch{Dm}vnutit toho \ch{Am}tlustokožce, \par
+\ch{Dm}originál \ch{Am}nosorožce, \ch{D\#dim}co nevidíš \ch{E7}v obchodech. \par
+\ch{Am\rep2}Řvala na mě, že jsem bohém, \ch{Dm}pak mi řekla: \ch{Am}padej, sbohem, \par
+\ch{Dm}zabouchla nám před \ch{Am}nosorohem, \ch{E7}tak tu sedím \ch{Am}na schodech. \par
+
+\bigskip
+
+\ch{Dm}Co nevidím - \ch{Am}souseda, jak \ch{E7}táhne domů \ch{Am}medvěda, \par
+\ch{Dm}originál \ch{Am}medvěda, \ch{D\#dim}tuším značky \ch{E7}grizzly. \par
+\ch{Am\rep2}Už ho ženě vnucuje a \ch{Dm}už ho taky \ch{Am}pucuje \par
+a \ch{Dm}zamčela a \ch{Am}trucuje, tak \ch{E7}si to taky \ch{Am}slízli. \par
+
+\bigskip
+
+\ch{Am\rep2}Tak tu sedím se sousedem, \ch{Dm}s nosorožcem \ch{Am}a s medvědem, \par
+\ch{Dm}nadáváme \ch{Am}jako jeden \ch{E7}na ty naše \ch{Am-E7-Am}slepice. \par
+
+\end{song}
+
+
+\begin{song}
+
+\SongTitle{Cukrářská bossanova}{Jaromír Nohavica}
+
+\beatsperchord4
+
+\textit{Strum:} paa rap paa rap -- pap
+
+\large
+
+\ukechord{Cmaj7}
+\ukechord{Csharpdim}
+\ukechord{Dm7}
+\ukechord{G7}
+
+\large
+
+\bigskip
+
+Můj \ch{Cmaj7}přítel \ch{C\#dim} snídá sedm \ch{Dm7}kremrolí \ch{G7} \par
+A když je \ch{Cmaj7}spořádá, dá si \ch{C\#dim}repete, \ch{Dm7}cukrlátko \ch{G7} \par
+On totiž \ch{Cmaj7}říká: \ch{C\#dim} "Dobré lidi zuby \ch{Dm7}nebolí \ch{G7} \par
+a je to \ch{Cmaj7}paráda, chodit \ch{C\#dim}po světě a \ch{Dm7}mít, \ch{G7}mít v ústech \par
+\ch{Cmaj7}sladko." \ch{C\#dim} \ch{Dm7} \ch{G7} \par
+
+\bigskip
+
+\begin{chorusboxwide}
+\note{refrén} \par \smallskip
+\ch{Cmaj7}Sláva, \ch{C\#dim} cukr a \ch{Dm7}káva a půl litru \ch{G7}becherovky \par
+\ch{Cmaj7}Hurá, hurá, hu\ch{C\#dim}rá, půjč mi \ch{Dm7}bůra, útrata dnes \ch{G7}dělá čtyři stovky \par
+Všechny \ch{Cmaj7}cukrářky z celé  \ch{C\#dim}republiky na něho \ch{Dm7}dělají slaďounké \ch{G7}cukrbliky \par
+A on jim \ch{Em}za odměnu zpívá \ch{C\#dim}zas a znovu \ch{Dm7}tuhletu \ch{G7 stop} \par
+cukrářskou bossano\ch{Cmaj7}vu \ch{C\#dim} \ch{Dm7} \ch{G7} \par
+\end{chorusboxwide}
+
+\bigskip
+
+Můj \ch{Cmaj7}přítel \ch{C\#dim} pije šťávu \ch{Dm7}z bezinek, \ch{G7} \par
+říká, že \ch{Cmaj7}nad ni není, že je \ch{C\#dim}glukózní, famózní, \par
+\ch{Dm7}monstrózní, ať si taky \ch{G7}dám, \par
+koukej, jak mu \ch{Cmaj7}roste \ch{C\#dim} oblast budoucích \ch{Dm7}maminek \ch{G7} \par
+a já mám \ch{Cmaj7}podezření že se \ch{C\#dim}zakulatí jako míč \par
+a \ch{Dm7}až ho někdo kopne, odku\ch{G7}tálí se mi pryč \par
+a já zůstanu \ch{Cmaj7}sám, \ch{C\#dim} úplně \ch{Dm7}sám. \ch{G7} \par
+
+\bigskip
+\note{refrén}
+\bigskip
+
+Můj \ch{Cmaj7}přítel \ch{C\#dim} už na špičky si \ch{Dm7}nevidí, \ch{G7} \par
+postava \ch{Cmaj7}fortelná se mu \ch{C\#dim}zvětšuje, \ch{Dm7}výměra tři ary \ch{G7} \par
+On ale \ch{Cmaj7}tvrdí: \ch{C\#dim} "Glycidy jsou \ch{Dm7}pro lidi" \ch{G7} \par
+Je prý v něm \ch{Cmaj7}kotelna, ta cukry \ch{C\#dim}spaluje, \par
+někdo se \ch{Dm7}zkáruje, někdo se \ch{G7}zfetuje \par
+A on jí \ch{Cmaj7}bonpari, bon- bon- ... \ch{C\#dim} \ch{Dm7} bonpari. \ch{G7} \par
+
+\bigskip
+
+\ch{Cmaj7}Sláva, \ch{C\#dim} cukr a \ch{Dm7}káva a půl litru \ch{G7}becherovky, \par
+\ch{Cmaj7}hurá, hurá, hu\ch{C\#dim}rá, půjčte mi \ch{Dm7}bůra, útrata dnes \ch{G7}dělá čtyři stovky, \par
+všechny \ch{Cmaj7}cukrářky z obou \ch{C\#dim}republik na něho \ch{Dm7}dělají veliký \ch{G7}cukrblik \par
+a on jim \ch{Em}za odměnu zpívá \ch{C\#dim}zas a znovu \ch{Dm7}tuhletu \ch{G7 stop} \par
+cukrářskou bossano\ch{Cmaj7}vu. \ch{C\#dim} \ch{Dm7} \ch{G7} \par
+
+\bigskip
+
+\note{outro} \par
+\ch{Cmaj7} \ch{C\#dim} \ch{Dm7} \ch{G7} \textit{(niekoľkokrát)} \par
+\ch{Cmaj7} \par
+
+\end{song}
+
+
+
+\begin{song}
+
+\SongTitle{Riptide}{Vance Joy}
+
+\beatsperchord4
+
+\textit{Verse:} $\Down\Miss\AccentDown\Miss\Miss\Up\Down\Up$
+\textit{Chorus:} $\Down\Miss\ChuckDown\Up\Miss\Up\ChuckDown\Up$
+\textit{Original: +1}
+
+\large
+
+\ukechord{Am}
+\ukechord{G}
+\ukechord{C}
+\ukechord{F}
+
+\large
+
+\bigskip
+
+\note{intro} \ch{Am} \ch{G} \ch{C} \ch{C} x2
+
+\bigskip
+
+\ch{Am}I was scared of \ch{G}dentists and the \ch{C\rep2}dark \par
+\ch{Am}I was scared of \ch{G}pretty girls and \ch{C\rep2}starting conversations \par
+Oh-\ch{Am}oh, all my \ch{G}friends are turning \ch{C\rep2}green \par
+You're the \ch{Am}magician's ass\ch{G}istant in their \ch{C\rep2}dream \par
+Ah-\ch{Am}ooh \ch{G}ooh \ch{C\rep2}ooh \par
+Ah-\ch{Am}oh-ohh \ch{G} and they \ch{C\rep2 – single strum}come unstuck \par
+
+\bigskip
+
+\begin{chorusbox}
+\note{chorus} \par \smallskip
+\ch{Am}Lady... \ch{G}running down to the \ch{C\rep2}riptide... taken away to the \par
+\ch{Am}Dark side... \ch{G}I wanna be your \ch{C\rep2}left-hand man \par
+I \ch{Am}love you... \ch{G}when you're singing that \ch{C\rep2}song and... I got a lump in my \par
+\ch{Am}Throat cos \ch{G}you're gonna sing the wo-\ch{C\rep2}-ords wrong \par
+\end{chorusbox}
+
+\bigskip
+
+\ch{Am}There's this movie \ch{G}that I think you'll \ch{C\rep2}like \par
+This \ch{Am} guy decides to \ch{G}quit his job and \ch{C\rep2}heads to New York City \par
+This \ch{Am}cowboy's... \ch{G}running from him\ch{C\rep2}self \par
+And \ch{Am}she's been living \ch{G}on the highest \ch{C\rep2}shelf \par
+Ah-\ch{Am}ooh \ch{G}ooh \ch{C\rep2}ooh \par
+Ah-\ch{Am}oh-ohh \ch{G} and they \ch{C\rep2 – single strum}come unstuck \par
+
+\bigskip
+
+\note{chorus} \par
+
+\bigskip
+
+\ch{Am\rep4} \par
+\ch{Am\rep2}I just wanna... I just wanna know \ch{G\rep2} \par
+\ch{C\rep2} If you're gonna... if you're gonna stay \ch{F\rep2} \par
+\ch{Am\rep2} I just gotta... I just gotta know \ch{G\rep2} \par
+\ch{C\rep2}I can't have it... I can't have it \ch{F\rep2}any other way \par
+\note{single chords} \par
+I \ch{Am} swear she's \ch{G}destined for the \ch{C\rep2}screen \par
+\ch{Am}Closest thing to \ch{G}Michelle Pfeiffer \ch{C\rep2}that you've ever seen, oh \par
+
+\bigskip
+
+
+\note{chorus} x2 \par
+
+\bigskip
+
+I got a lump in my \ch{Am}throat cos \ch{G}you're gonna sing the words \ch{C - single strum}wrong \par
+
+\end{song}
+
+
+\end{document}
