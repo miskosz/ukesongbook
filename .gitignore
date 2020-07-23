@@ -1,5 +1,6 @@
 # Temporarily don't commit the output, until the repo stabilises.
 *.pdf
+venv
 
 ###############
 ## TeX
