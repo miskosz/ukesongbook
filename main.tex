@@ -19,6 +19,7 @@
 \usepackage{wrapfig}                        % chords on page side
 \usepackage{pbox}
 \usepackage{tcolorbox}
+\usepackage{fdsymbol}                       % nice arrows
 
 \input{ukulelechords.tex}
 
@@ -114,20 +115,21 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % STRUMMING
 
+\newcommand{\fixwidth}[2][7pt]{\hbox to#1{\hss$#2$\hss}}
 \newcommand{\rang}{\begin{picture}(5,7)
 \put(1.1,2.5){\rotatebox{135}{\line(1,0){3.0}}}
 \put(1.1,2.5){\rotatebox{225}{\line(1,0){3.0}}}
 \end{picture}}
-\newcommand{\Miss}{\hspace{-0.5ex}\cdot\hspace{-0.5ex}}
-\newcommand{\Down}{\downarrow}
-\newcommand{\AccentDown}{\stackrel{\rang}{\downarrow}}
-\newcommand{\ChuckDown}{\stackrel{\scriptscriptstyle\times}{\downarrow}}
-\newcommand{\StaccatoDown}{\stackrel{\cdot}{\downarrow}}
-\newcommand{\Up}{\uparrow}
-\newcommand{\AccentUp}{\stackrel{\rang}{\uparrow}}
-\newcommand{\ChuckUp}{\stackrel{\scriptscriptstyle\times}{\uparrow}}
-\newcommand{\StaccatoUp}{\stackrel{\cdot}{\uparrow}}
-\newcommand{\Separator}{\hspace{0.2ex}\bigg|\hspace{0.2ex}}
+\newcommand{\Miss}{\fixwidth\cdot}
+\newcommand{\Down}{\fixwidth\downarrow}
+\newcommand{\AccentDown}{\fixwidth{\stackrel{\rang}{\downarrow}}}
+\newcommand{\ChuckDown}{\fixwidth{\stackrel{\scriptscriptstyle\times}{\downarrow}}}
+\newcommand{\StaccatoDown}{\fixwidth{\stackrel{\cdot}{\downarrow}}}
+\newcommand{\Up}{\fixwidth\uparrow}
+\newcommand{\AccentUp}{\fixwidth{\stackrel{\rang}{\uparrow}}}
+\newcommand{\ChuckUp}{\fixwidth{\stackrel{\scriptscriptstyle\times}{\uparrow}}}
+\newcommand{\StaccatoUp}{\fixwidth{\stackrel{\cdot}{\uparrow}}}
+\newcommand{\Separator}{\hspace{3pt}\big|\hspace{3pt}}
 
 \begin{document}%
 	
