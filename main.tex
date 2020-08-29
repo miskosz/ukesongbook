@@ -34,15 +34,21 @@
 }{%
 }%
 
+% Remarks
+\newcommand{\note}[1]{\textbf{[#1]}}
+\newcommand{\vocals}[1]{\textit{(#1)}}
+
 % Chorusbox environment. Makes a box around text, used mostly for choruses.
+% Takes one parameter, the text displayed at the top of the box.
 \newsavebox{\chbox}
 \newlength{\chboxsep}
 \setlength{\chboxsep}{1.5ex}
 \newlength{\savedfboxsep}
-\newenvironment{chorusbox}{%
+\newenvironment{chorusbox}[1]{%
     \hspace{-\chboxsep}%
     \begin{lrbox}{\chbox}%
     \begin{minipage}{\linewidth-3ex}%
+    \note{#1} \par \smallskip
 }{%
     \end{minipage}%
     \end{lrbox}%
@@ -51,10 +57,11 @@
     \fbox{\usebox{\chbox}}%
     \setlength{\fboxsep}{\savedfboxsep}%
 }
-\newenvironment{chorusboxwide}{%
+\newenvironment{chorusboxwide}[1]{%
     \hspace{-\chboxsep}%
     \begin{lrbox}{\chbox}%
     \begin{minipage}{\linewidth}%
+    \note{#1} \par \smallskip
 }{%
     \end{minipage}%
     \end{lrbox}%
@@ -106,11 +113,6 @@
 \newcommand{\beat}{\beats1}
 
 \newcommand{\beatsperchord}[1]{(X) = (X\beats#1)}
-
-
-% Playing note
-\newcommand{\note}[1]{\textbf{[#1]}}
-\newcommand{\vocals}[1]{\textit{(#1)}}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
