@@ -20,6 +20,7 @@
 \usepackage{pbox}
 \usepackage{tcolorbox}
 \usepackage{fdsymbol}                       % nice arrows
+\usepackage{stackengine}                    % symbol stacking for plucking
 
 \input{ukulelechords.tex}
 
@@ -133,6 +134,10 @@
 \newcommand{\ChuckUp}{\fixwidth{\stackrel{\scriptscriptstyle\times}{\uparrow}}}
 \newcommand{\StaccatoUp}{\fixwidth{\stackrel{\cdot}{\uparrow}}}
 \newcommand{\Separator}{\hspace{3pt}\big|\hspace{3pt}}
+% Example usage: \PluckDown{A E G}
+\newcommand{\PluckDown}[1]{\fixwidth{\stackrel{\tiny\Shortstack{#1}}{\downarrow}}}
+\newcommand{\PluckUp}[1]{\fixwidth{\stackrel{\tiny\Shortstack{#1}}{\uparrow}}}
+
 
 \begin{document}%
 	
