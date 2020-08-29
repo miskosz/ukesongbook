@@ -74,10 +74,11 @@
 % Song header.
 % Params: title, author
 \newcommand{\SongTitle}[2]{%
+	\phantomsection%
+	\addcontentsline{toc}{subsection}{#1 (#2)}%
 	\begin{center}
 	\Huge{#1} \Large{(#2)}\par%
 	\end{center}%
-    \addcontentsline{toc}{subsection}{#1 (#2)}%
 }
 % Params: capo_position
 \newcommand{\Capo}[1]{\textit{Original: Capo #1}\par}
