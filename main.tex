@@ -80,12 +80,12 @@
 }%
 
 % Song header.
-% Params: title, author
-\newcommand{\SongTitle}[2]{%
+% Params: title, author, [title size - default \Huge]
+\newcommand{\SongTitle}[3][\Huge]{%
 	\phantomsection%
-	\addcontentsline{toc}{subsection}{#1 (#2)}%
+	\addcontentsline{toc}{subsection}{#2 (#3)}%
 	\begin{center}
-	\Huge{#1} \penalty-1\Large{(#2)}\par%
+	#1{#2} \penalty-1\Large{(#3)}\par%
 	\end{center}%
 }
 % Params: capo_position

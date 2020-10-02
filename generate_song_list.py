@@ -22,7 +22,7 @@ def main(song_dir: Path) -> None:
     key_and_file_pairs = []
     for song_file in song_dir.glob("*.tex"):
         match = re.match(
-            r".*\\SongTitle\{(?P<title>[^\}]+)\}\{(?P<artist>[^\}]+)\}",
+            r".*\\SongTitle(\[[^\[]+\])?\{(?P<title>[^\}]+)\}\{(?P<artist>[^\}]+)\}",
             song_file.read_text(),
             re.DOTALL | re.UNICODE,
         )
