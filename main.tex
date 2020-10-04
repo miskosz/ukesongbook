@@ -21,6 +21,7 @@
 \usepackage{tcolorbox}
 \usepackage{fdsymbol}                       % nice arrows
 \usepackage{stackengine}                    % symbol stacking for plucking
+\usepackage{relsize}
 
 \input{ukulelechords.tex}
 
@@ -49,7 +50,7 @@
     \hspace{-\chboxsep}%
     \begin{lrbox}{\chbox}%
     \begin{minipage}{\linewidth-3ex}%
-    \note{#1} \par \smallskip
+    #1 \par \smallskip
 }{%
     \end{minipage}%
     \end{lrbox}%
@@ -62,7 +63,7 @@
     \hspace{-\chboxsep}%
     \begin{lrbox}{\chbox}%
     \begin{minipage}{\linewidth}%
-    \note{#1} \par \smallskip
+    #1 \par \smallskip
 }{%
     \end{minipage}%
     \end{lrbox}%
@@ -115,6 +116,12 @@
 
 \newcommand{\beatsperchord}[1]{(X) = (X\beats#1)}
 
+% Tags
+\newcommand{\Refren}{\textbf{R{\smaller EFRÉN}}}
+\newcommand{\Chorus}{\textbf{C{\smaller HORUS}}}
+\newcommand{\Intro}{\textbf{I{\smaller NTRO}}}
+\newcommand{\Outro}{\textbf{O{\smaller UTRO}}}
+\newcommand{\PrechorusAndChorus}{\textbf{P{\smaller RE-CHORUS AND} C{\smaller HORUS}}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % STRUMMING
