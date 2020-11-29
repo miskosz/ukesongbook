@@ -99,7 +99,7 @@
 % Params: title, author, [title size - default \Huge]
 \newcommand{\SongTitle}[3][\Huge]{%
 	\phantomsection%
-	\addcontentsline{toc}{subsection}{#2 (#3)}%
+	\addcontentsline{toc}{subsection}{#2\ \ \textit{(#3)}}%
 	\begin{center}
 	#1{#2} \penalty-1\Large{(#3)}\par%
 	\end{center}%
