@@ -37,6 +37,7 @@
 \usepackage{fdsymbol}                       % nice arrows
 \usepackage{stackengine}                    % symbol stacking for plucking
 \usepackage{relsize}
+\usepackage{incgraph}                          % cover image
 
 \input{ukulelechords.tex}
 
@@ -164,28 +165,30 @@
 
 
 \begin{document}%
-	
+
+\incgraph[documentpaper][width=\paperwidth,height=\paperheight]{cover.png}
+
 % Set default font.
 \fontfamily{lmss}\selectfont
 %\sffamily
 
 
 % Title page.
-\title{
-	\normalsize \textsc{Introduction to Computer Vision} \\
-	\vspace{20\baselineskip}
-	\LARGE \textbf{\uppercase{TODO Ukulele Spevník}} \\
-	\normalsize \today \vspace*{15\baselineskip}
-}
-
-\date{}
-
-\author{
-	Your Names \\ 
-	Colorado School of Mines \\ }
-
-\maketitle
-\newpage
+%\title{
+%	\normalsize \textsc{Introduction to Computer Vision} \\
+%	\vspace{20\baselineskip}
+%	\LARGE \textbf{\uppercase{TODO Ukulele Spevník}} \\
+%	\normalsize \today \vspace*{15\baselineskip}
+%}
+%
+%\date{}
+%
+%\author{
+%	Your Names \\ 
+%	Colorado School of Mines \\ }
+%
+%\maketitle
+%\newpage
 
 % Table of contents.
 \tableofcontents
