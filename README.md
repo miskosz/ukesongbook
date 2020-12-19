@@ -22,8 +22,8 @@ you need to run roughly this:
 ```shell
 $ # On MacOS
 $ brew install icu4c
-$ brew link icu4c --force                      # Tells you what to do
-$ export PATH="/usr/local/opt/icu4c/bin:$PATH  # Add to your .profile for repeated use
+$ brew link icu4c --force                       # Tells you what to do
+$ export PATH="/usr/local/opt/icu4c/bin:$PATH"  # Add to your .profile for repeated use
 ```
 
 Follow these steps to set up your python virtual environment:
