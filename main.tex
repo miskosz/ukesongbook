@@ -33,11 +33,14 @@
 \usepackage{pbox}
 \usepackage{tcolorbox}
 \usepackage{fdsymbol}                       % nice arrows
-\usepackage{stackengine}                    % symbol stacking for plucking
+\usepackage[usestackEOL]{stackengine}       % symbol stacking for plucking
 \usepackage{relsize}                        % font size manipulation
 \usepackage{incgraph}                       % cover image
 \usepackage{tabularx}
 \usepackage{gchords}                        % guitar chords
+\usepackage{environ}                        % define environments with body var
+\input{insbox}								% float for strumbox
+
 
 \input{ukulelechords.tex}
 
@@ -48,7 +51,7 @@
 \newenvironment{song}{%
 	\pagebreak%
 	\parindent0pt%
-    \Large%
+    \large%
 }{%
 }%
 
@@ -96,14 +99,33 @@
     \endwrapfloat%
 }%
 
+% Strumbox.
+\NewEnviron{strumbox}{%
+    \InsertBoxR{0}{\BODY}%
+}%
+%\NewEnviron{strumboxII}{%
+%	\begin{wrapfloat}{minipage}{r}{0pt}
+%	\Longstack[l]{\BODY}
+%	\end{wrapfloat}
+%}
+%\newcommand\strumboxIII[1]{%
+%    \begin{wrapfloat}{minipage}{r}{0pt}
+%%    \vspace{-10pt}
+%    \Longstack[l]{
+%    #1
+%	}
+%    \end{wrapfloat}
+%}%
+
 % Song header.
 % Params: title, author, [title size - default \Huge]
 \newcommand{\SongTitle}[3][\Huge]{%
 	\phantomsection%
 	\addcontentsline{toc}{subsection}{#2\ \ \textit{(#3)}}%
-	\begin{center}
-	#1{#2} \penalty-1\Large{(#3)}\par%
-	\end{center}%
+	{\centering
+		#1 #2 \penalty-1{\Large (#3)}\par
+		\medskip
+	}
 }
 % Params: capo_position
 \newcommand{\Capo}[1]{\textit{Original: Capo #1}\par}
