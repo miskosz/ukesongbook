@@ -36,7 +36,7 @@
       }
     }
     \node at (2.5,-5.5) {\chordlabel};
-    \path[use as bounding box] (0.5,1.5) rectangle (4.5,-6.0);
+    \path[use as bounding box] (0.4,1.5) rectangle (4.6,-6.0);
     % \draw (0.5,1.5) rectangle (4.5,-6.0);
     % \path[use as bounding box] (0.5,.5) rectangle (4.5,-5); % TODO: make larger now that I added the text?
   \end{tikzpicture}%
@@ -69,6 +69,7 @@
   }{%
     \GenericError{}{Undefined ukulele chord '#1'}{}{}% 
   }%
+  \ignorespaces
 }
 \makeatother
 

@@ -55,10 +55,6 @@
 }{%
 }%
 
-% Remarks
-\newcommand{\note}[1]{\textbf{\textit{[#1]}}}
-\newcommand{\vocals}[1]{\textit{(#1)}}
-
 % Chorusbox environment. Makes a box around text, used mostly for choruses.
 % Takes one parameter, the text displayed at the top of the box.
 \newsavebox{\chbox}
@@ -92,12 +88,16 @@
     \setlength{\fboxsep}{\savedfboxsep}%
 }%
 
+% Headerbox.
+\NewEnviron{headerbox}{{\centering\BODY\par}}%
+
 % Chordbox environment. Places chords in a float at the right side of the page.
 \newenvironment{chordbox}{%
     \wrapfloat{minipage}{r}{7.5ex}%
 }{%
     \endwrapfloat%
 }%
+\NewEnviron{hchordbox}{{\centering\BODY\par}}%
 
 % Strumbox.
 \NewEnviron{strumbox}{%
@@ -127,8 +127,10 @@
 		\medskip
 	}
 }
-% Params: capo_position
-\newcommand{\Capo}[1]{\textit{Original: Capo #1}\par}
+
+% Remarks
+\newcommand{\note}[1]{\textbf{\textit{[#1]}}}
+\newcommand{\vocals}[1]{\textit{(#1)}}
 
 % Chord macro
 \newcommand{\ch}[1]{\textbf{(#1)}}
