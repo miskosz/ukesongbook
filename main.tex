@@ -4,22 +4,6 @@
 \usepackage[slovak]{babel}
 \usepackage[no-math]{fontspec}
 
-%\usepackage[default]{droidserif}
-%\usepackage[defaultsans]{droidsans}
-%\setromanfont{Times New Roman}
-%\setsansfont{Arial} % nie
-%\setsansfont{Lucida Grande} % nie, nevyrazny bold
-%\setsansfont{Helvetica Neue} % nie
-%\setsansfont{Helvetica} % nie, obycajne
-%\setsansfont{Avenir Next} % nie, prigulate
-%\setsansfont{Tahoma} % nie
-%\setsansfont{Trebuchet MS} % nie, slaby bold. Podobne lmss?
-
-%\setsansfont{Gill Sans} % OK, nevie d s makcenom
-%\setsansfont{Gill Sans Light} % OK, vie??? d s makcenom
-%\setsansfont{Verdana} % OK
-%\setsansfont{PT Sans} % OK
-
 \usepackage[top=2cm,left=2cm,bottom=2cm,right=2cm,a4paper]{geometry}
 \usepackage{verbatim}                       % support for comment and verbatim
 \usepackage{graphicx}                       % support for images
@@ -45,6 +29,9 @@
 
 
 \input{ukulelechords.tex}
+
+% Font
+\renewcommand{\familydefault}{\sfdefault}
 
 % Enable centered table cells with specified width
 \newcommand{\PreserveBackslash}[1]{\let\temp=\\#1\let\\=\temp}
@@ -112,19 +99,6 @@
 \NewEnviron{strumbox}{%
     \InsertBoxR{0}{{\vrule height 2.5ex depth 0pt width 0pt}\BODY}%
 }%
-%\NewEnviron{strumboxII}{%
-%	\begin{wrapfloat}{minipage}{r}{0pt}
-%	\Longstack[l]{\BODY}
-%	\end{wrapfloat}
-%}
-%\newcommand\strumboxIII[1]{%
-%    \begin{wrapfloat}{minipage}{r}{0pt}
-%%    \vspace{-10pt}
-%    \Longstack[l]{
-%    #1
-%	}
-%    \end{wrapfloat}
-%}%
 
 % Song header.
 % Params: title, author, [title size - default \Huge]
@@ -141,18 +115,10 @@
 \newcommand{\note}[1]{\textbf{\textit{[#1]}}}
 \newcommand{\vocals}[1]{\textit{(#1)}}
 
-% Chord macro
+% Chord macros
 \newcommand{\ch}[1]{\textbf{(#1)}}
 \newcommand{\rep}[1]{\hspace{2pt}x#1}
-% \newcommand{\rep}[1]{\textsuperscript{\textbf#1}}
-% \newcommand{\beat}{\hspace{-1pt}/}
-% \newcommand{\beat}{\textquotesingle}
-% \newcommand{\beat}{\textsuperscript{\textbf{\sfrac{1}{2}}}}
-
-
 \newcommand{\beatsymbol}{\textquotesingle}
-% \newcommand{\beatsymbol}{\hspace{-1pt}/}
-
 \newcount\myloopcounter
 \newcommand{\beats}[1]{%
   \myloopcounter0% initialize the loop counter
@@ -162,7 +128,6 @@
   \repeat % start again
 }
 \newcommand{\beat}{\beats1}
-
 \newcommand{\beatsperchord}[1]{(X) = (X\beats#1)}
 
 % Tags
@@ -202,11 +167,6 @@
 \begin{document}%
 
 \incgraph[documentpaper][width=\paperwidth,height=\paperheight]{cover.png}
-
-% Set default font.
-\fontfamily{lmss}\selectfont
-%\sffamily
-
 
 % Title page.
 %\title{
