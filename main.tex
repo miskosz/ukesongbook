@@ -88,10 +88,11 @@
 
 % Chordbox environment. Places chords in a float at the right side of the page.
 \newenvironment{chordbox}{%
-    \wrapfloat{minipage}{r}{7.5ex}%
-    \vspace{-3ex}
+	\wrapfloat{minipage}{r}{7.5ex}%
+	\vspace{-3ex}%
 }{%
-    \endwrapfloat%
+	\vspace{-12ex}% Get rid of a mysterious white space at the bottom
+	\endwrapfloat%
 }%
 \NewEnviron{hchordbox}{{\centering\BODY\par}}%
 
