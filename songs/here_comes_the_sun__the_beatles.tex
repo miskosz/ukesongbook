@@ -3,16 +3,20 @@
 \SongTitle{Here Comes the Sun}{The Beatles}
 
 \begin{headerbox}
-\beatsperchord2 \quad TODO
-\textit{Strum:} $\Down\Miss\Down\Up$
+\RaiseBoxWithAccents
+\beatsperchord4 \quad
+\textit{Original: +2} \quad
+\textit{Strum:} $\Down\Miss\ChuckDown\Up\Miss\Up\ChuckDown\Up$
 \end{headerbox}
 
 \begin{hchordbox}
 \ukechord{A7}
-\ukechord{Am}
+\ukechord{Am7}
 \ukechord{Bb}
 \ukechord{C}
 \ukechord{D}
+\ukechord{Dsus4}
+\ukechord{D7}
 \ukechord{F}
 \ukechord{G}
 \end{hchordbox}
@@ -21,10 +25,17 @@
 
 \bigskip
 
+{
+\smaller $\triangle$ - play three eighth notes (one and a half beat)\footnote{Advanced version: Play \textbf{Emadd11-Dsus4-C6-Dsus4} from the box instead of \textbf{C-G-Am7-G}.}
+}
+
+\bigskip
+
 \begin{chorusbox}{\Chorus}
 \ch{G\rep2} Here comes the sun \vocals{do-do-do-do} \par
 \ch{C} Here comes the \ch{A7}sun, and I say \par
-\ch{G} It's alright \ch{C-G-Am-G} \ch{D\beats2} \par
+\ch{G} It's alright \ch{C$^\triangle$}\ch{G$^\triangle$}\ch{Am7$^\triangle$}\ch{G$^\triangle$} \ch{D\beats2} \par
+\ch{G} \ch{D} \par
 \end{chorusbox}
 
 \bigskip
@@ -38,10 +49,6 @@
 
 \bigskip
 
-\ch{G} \ch{D}
-
-\bigskip
-
 \ch{G\rep2} Little darling, the smiles re\ch{C}turning to the \ch{D}faces \par
 \ch{G\rep2} Little darling, it seems like \ch{C}years since it's been \ch{D}here \par
 
@@ -51,12 +58,9 @@
 
 \bigskip
 
-\ch{G} \ch{D}
-
-\bigskip
-
-\note{todo - five times} \par
-\ch{Bb}Sun, \ch{F}sun, \ch{C}sun, here it \ch{G}comes \ch{D} \par
+\ch{Bb$^\triangle$}Sun, \ch{F$^\triangle$}sun, \ch{C$^{\triangle\triangle}$}sun, here it \ch{G}comes \ch{D} \par
+\ch{Bb$^\triangle$}Sun, \ch{F$^\triangle$}sun, \ch{C$^{\triangle\triangle}$}sun, here it \ch{G}comes \par
+\ch{D} \ch{Dsus4} \ch{D} \ch{D7} \par
 
 \bigskip
 
@@ -69,11 +73,22 @@
 
 \bigskip
 
+\begin{strumbox}
+\large
+\fbox{
+\drawukulelechord{Emadd11}{0,4,3,0}
+\drawukulelechord{Dsus4}{0,2,3,0}
+\drawukulelechord{C6}{0,0,3,0}
+}
+\end{strumbox}
+
 \ch{G\rep2} Here comes the sun \vocals{do-do-do-do} \par
 \ch{C} Here comes the \ch{A7}sun \par
-\ch{G} It's alright \ch{C-G-Am-G} \ch{D\beats2} \par
-\ch{G} It's alright \ch{C-G-Am-G} \ch{D\beats2} \par
+\ch{G} It's alright \ch{C$^\triangle$}\ch{G$^\triangle$}\ch{Am7$^\triangle$}\ch{G$^\triangle$} \ch{D\beats2} \par
+\ch{G} It's alright \ch{C$^\triangle$}\ch{G$^\triangle$}\ch{Am7$^\triangle$}\ch{G$^\triangle$} \ch{D\beats2} \par
 
-\ch{Bb} \ch{F} \ch{C} \ch{G - single strum}
+\ch{Bb$^\triangle$} \ch{F$^\triangle$} \ch{C$^{\triangle\triangle}$} \ch{G - single strum}
+
+\vfill
 
 \end{song}
