@@ -26,7 +26,7 @@
 \usepackage[yyyymmdd]{datetime}
 \usepackage{array}
 \input{insbox}								% float for strumbox
-
+\usepackage[stamp]{draftwatermark}
 
 \input{ukulelechords.tex}
 
@@ -167,26 +167,20 @@
 \newcommand{\PluckUp}[1]{\fixwidth{\stackrel{\tiny\Shortstack{#1}}{\uparrow}}}
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% VERSION
+\renewcommand{\dateseparator}{-}
+\newcommand{\songbookversion}{v0.2.\today}
+\SetWatermarkText{Draft \songbookversion}
+\SetWatermarkColor[gray]{0.5}
+\SetWatermarkFontSize{1cm}
+\SetWatermarkAngle{90}
+\SetWatermarkHorCenter{1cm}
+
+
 \begin{document}%
 
 \incgraph[documentpaper][width=\paperwidth,height=\paperheight]{cover.png}
-
-% Title page.
-%\title{
-%%	\normalsize \textsc{Introduction to Computer Vision} \\
-%	\vspace{20\baselineskip}
-%	\LARGE \textbf{\uppercase{TODO Ukulele Spevník}} \\
-%	\normalsize \today \vspace*{15\baselineskip}
-%}
-%
-%\date{}
-%
-%\author{
-%	Your Names \\ 
-%	Colorado School of Mines \\ }
-%
-%\maketitle
-%\newpage
 
 \begin{titlepage}
 	\begin{center}
@@ -199,8 +193,7 @@
 		\vspace{4cm}
 
 		\LARGE
-		\renewcommand{\dateseparator}{-}
-		v0.1.\today
+		Draft \songbookversion
 
 		\vfill
 
