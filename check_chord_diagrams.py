@@ -37,24 +37,30 @@ def check_file(song_file_str: str) -> str:
     contents_preprocessed = song_file_str.replace("\\#", "sharp")
 
 
-    # Everything between curly brackets in \ukechord{...} 
+    # Everything between curly brackets in \ukechord{...} up until "_"
     diagrams = re.findall(
-        r"\\ukechord\{([^\}]+)\}",
+        r"\n\\ukechord\{([^\}_]+)[^\}]*\}",
         contents_preprocessed,
         re.DOTALL | re.UNICODE,
     )
+    # Remove consecutive duplicates
+    diagrams = [
+        x for i, x in enumerate(diagrams)
+        if i == len(diagrams) - 1 or x != diagrams[i + 1]
+    ]
     diagrams_sort = sorted(diagrams)
 
     # Between curly brackets in \ch{...}, take all alphanum characters from
     # the beginning, after an optional star. This is to exclude \rep, \beats
     # or other special instructions inside. 
     used_chords = re.findall(
-        r"\\ch\{\*?([\w\.]+)[^\}]*\}",
+        r"\\ch\{\*?([\w\./]+)[^\}]*\}",
         contents_preprocessed,
         re.DOTALL | re.UNICODE,
     )
     # Sort and make unique. Remove "N.C."
     used_chords_uniq_sort = sorted(list(set(used_chords) - set(["N.C."])))
+    used_chords_no_simple = sorted(list(set(used_chords) - set(["N.C.", "Am", "C", "F", "G"])))
 
     ###
     # Checks
@@ -66,7 +72,7 @@ def check_file(song_file_str: str) -> str:
         message += f"{tab}{tab}diagrams: {diagrams}\n"
         message += f"{tab}{tab}sorted: {diagrams_sort}\n"
 
-    if diagrams_sort != used_chords_uniq_sort:
+    if diagrams_sort != used_chords_uniq_sort and diagrams_sort != used_chords_no_simple:
         message += f"{tab}Warning: Used chords list does not match the diagrams!\n"
         message += f"{tab}{tab}diagrams: {diagrams_sort}\n"
         message += f"{tab}{tab}used chords: {used_chords_uniq_sort}\n"
