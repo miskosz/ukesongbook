@@ -5,6 +5,12 @@ import click
 import click_pathlib
 
 
+ignored_files = [
+    "songs/marniva_sesternice__jiri_suchy.tex",
+    "songs/under_the_bridge__red_hot_chilli_peppers.tex",
+]
+
+
 @click.command("Check that diagrams are listed for all used song chords.")
 @click.option(
     "-i",
@@ -13,12 +19,28 @@ import click_pathlib
     type=click_pathlib.Path(exists=True),
     help="input directory with songs",
 )
-def main(song_dir: Path) -> None:
+@click.option(
+    "-r",
+    "--report_ignored",
+    is_flag=True,
+    help="report warnings also for files in the ignore list",
+)
+@click.option(
+    "-p",
+    "--print-tex-code",
+    is_flag=True,
+    help="print tex code with all used chords for songs with detected warnings",
+)
+def main(song_dir: Path, report_ignored: bool, print_tex_code: bool) -> None:
     num_warn_files = 0
     for song_filename in song_dir.glob("*.tex"):
+        # Run chord parsing also for ignored files.
         song_file_str = song_filename.read_text()
-        warn_message = check_file(song_file_str)
-        if warn_message:
+        warn_message = check_file(song_file_str, print_tex_code)
+
+        if warn_message and (
+            report_ignored or str(song_filename) not in ignored_files
+        ):
             num_warn_files += 1
             print(song_filename)
             print(warn_message)
@@ -29,7 +51,7 @@ def main(song_dir: Path) -> None:
         print(f"Warnings in {num_warn_files} song files.")
 
 
-def check_file(song_file_str: str) -> str:
+def check_file(song_file_str: str, print_tex_code: bool) -> str:
     """
     Checks if chord diagrams match the chords used in the song.
     """
@@ -52,14 +74,19 @@ def check_file(song_file_str: str) -> str:
     ]
     diagrams_sort = sorted(diagrams, key=chord_sort_key)
 
-    # Between curly brackets in \ch{...}, take all alphanum characters from
+    # Between curly brackets in \ch{...}, take all alphanum+ characters from
     # the beginning, after an optional star. This is to exclude \rep, \beats
-    # or other special instructions inside. 
-    used_chords = re.findall(
-        r"\\ch\{\*?([\w\./]+)[^\}]*\}",
+    # or other special instructions inside. Besides alphanum, also include:
+    # - '.' to handle "N.C."
+    # - '/' to handle slash chords
+    # - '-' to handle e.g. (Am-G-F)
+    used_chords_plus = re.findall(
+        r"\\ch\{\*?([\w\./-]+)[^\}]*\}",
         tex_code,
         re.DOTALL | re.UNICODE,
     )
+    used_chords = flatten([x.split('-') for x in used_chords_plus])
+
     # Sort and make unique. Remove "N.C."
     used_chords_uniq_sort = sorted(
         list(set(used_chords) - set(["N.C."])), key=chord_sort_key
@@ -80,9 +107,16 @@ def check_file(song_file_str: str) -> str:
         message += f"{tab}{tab}sorted:   {diagrams_sort}\n"
 
     if diagrams_sort != used_chords_uniq_sort and diagrams_sort != used_chords_no_simple:
-        message += f"{tab}Warning: Used chords list does not match the diagrams!\n"
+        message += f"{tab}Warning: Used chord list does not match the diagrams!\n"
         message += f"{tab}{tab}diagrams:    {diagrams_sort}\n"
         message += f"{tab}{tab}used chords: {used_chords_uniq_sort}\n"
+
+    if print_tex_code and message:
+        message += f"{tab}Tex code:\n"
+        message += "\n".join(
+            [f"{tab}{tab}\\ukechord{{{ch}}}" for ch in used_chords_uniq_sort]
+        )
+        message += "\n"
 
     return message
 
@@ -124,6 +158,10 @@ def chord_sort_key(ch):
     key.append(ch[i:])
 
     return key
+
+
+def flatten(t):
+    return [item for sublist in t for item in sublist]
 
 
 if __name__ == "__main__":
