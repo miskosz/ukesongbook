@@ -15,9 +15,9 @@ ignored_files = [
 @click.option(
     "-i",
     "--song-dir",
-    required=True,
+    default="songs",
     type=click_pathlib.Path(exists=True),
-    help="input directory with songs",
+    help="Input directory with songs. Default: 'songs'",
 )
 @click.option(
     "-r",
@@ -114,7 +114,7 @@ def check_file(song_file_str: str, print_tex_code: bool) -> str:
     if print_tex_code and message:
         message += f"{tab}Tex code:\n"
         message += "\n".join(
-            [f"{tab}{tab}\\ukechord{{{ch}}}" for ch in used_chords_uniq_sort]
+            [f"\\ukechord{{{ch}}}" for ch in used_chords_uniq_sort]
         )
         message += "\n"
 

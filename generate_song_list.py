@@ -10,9 +10,9 @@ import icu
 @click.option(
     "-i",
     "--song-dir",
-    required=True,
+    default="songs",
     type=click_pathlib.Path(exists=True),
-    help="input directory with songs",
+    help="Input directory with songs. Default: 'songs'",
 )
 def main(song_dir: Path) -> None:
     """
