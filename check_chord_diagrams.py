@@ -8,6 +8,7 @@ import click_pathlib
 ignored_files = [
     "songs/marniva_sesternice__jiri_suchy.tex",
     "songs/under_the_bridge__red_hot_chilli_peppers.tex",
+    "songs/sunny__bobby_hebb.tex",
 ]
 
 
