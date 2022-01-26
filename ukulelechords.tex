@@ -76,6 +76,8 @@
 
 \newcommand{\ukechord}{\ukulelechord}
 
+% Rough order: primarily by triad quality
+
 % Ab
 \defineukulelechord{Ab}{5,3,4,3}
 \defineukulelechord{Ab7}{1,3,2,3}
@@ -83,15 +85,15 @@
 
 % A
 \defineukulelechord{A}{2,1,0,0}
-\defineukulelechord{Am}{2,0,0,0}
-\defineukulelechord[Am]{Am_alt}{2,0,0,3}
-\defineukulelechord{Am7}{0,0,0,0}
-\defineukulelechordfret{Am11}{Am11}{5}{5,7,5,5}
-\defineukulelechord{Am7b5}{2,3,3,3}
 \defineukulelechord{Asus4}{2,2,0,0}
 \defineukulelechord{A7}{0,1,0,0}
 \defineukulelechord{A7sus4}{0,2,0,0}
+\defineukulelechord{Am}{2,0,0,0}
+\defineukulelechord[Am]{Am_alt}{2,0,0,3}
 \defineukulelechord{Am/C}{2,0,0,3}
+\defineukulelechord{Am7}{0,0,0,0}
+\defineukulelechord{Am7b5}{2,3,3,3}
+\defineukulelechordfret{Am11}{Am11}{5}{5,7,5,5}
 
 % A#
 \defineukulelechord[A\#m]{Asharpm}{3,1,1,1}
@@ -113,21 +115,22 @@
 \defineukulelechord{C}{0,0,0,3}
 \defineukulelechord[C]{C_barre3}{5,4,3,3}
 \defineukulelechord{Csus4}{0,0,1,3}
-\defineukulelechord{Caug}{1,0,0,3}
+\defineukulelechord{C6}{0,0,0,0}
 \defineukulelechord{C7}{0,0,0,1}
 \defineukulelechord[C7]{C7_barre3}{3,4,3,3}
-\defineukulelechord{C6}{0,0,0,0}
-\defineukulelechord{Cadd9}{0,2,0,3}
 \defineukulelechord{Cmaj7}{0,0,0,2}
+\defineukulelechord{Cadd9}{0,2,0,3}
 \defineukulelechord{Cm}{0,3,3,3}
-\defineukulelechord{Cm7}{3,3,3,3}
 \defineukulelechord{Cm6}{2,3,3,3}  % Cm/A
+\defineukulelechord[Cm6]{Cm6_alt}{0,3,3,0}
+\defineukulelechord{Cm7}{3,3,3,3}
+\defineukulelechord{Caug}{1,0,0,3}
 
 % C#
 \defineukulelechord[C\#]{Csharp}{1,1,1,4}
 \defineukulelechordfret{C\#}{Csharp_fret4}{4}{6,5,4,4}
-\defineukulelechord[C\#dim]{Csharpdim}{0,1,0,1}
 \defineukulelechord[C\#7]{Csharp7}{1,1,1,2}
+\defineukulelechord[C\#dim]{Csharpdim}{0,1,0,1}
 
 % Db
 \defineukulelechord{Dbmaj7}{1,1,1,3}
@@ -136,20 +139,20 @@
 % D
 \defineukulelechord{D}{2,2,2,0}
 \defineukulelechord[D]{D_barre2}{2,2,2,5}
+\defineukulelechord{Dsus2}{2,2,0,0}
+\defineukulelechord{Dsus4}{2,2,3,0}
 \defineukulelechord{D7}{2,2,2,3}
+\defineukulelechord{Dmaj7}{2,2,2,4}
 \defineukulelechord{Dm}{2,2,1,0}
 \defineukulelechordfret{Dm}{Dm_fret5}{5}{7,5,5,5}
 \defineukulelechord{Dm6}{2,2,1,2}
 \defineukulelechord{Dm7}{2,2,1,3}
-\defineukulelechord{Dmaj7}{2,2,2,4}
-\defineukulelechord{Dsus2}{2,2,0,0}
-\defineukulelechord{Dsus4}{2,2,3,0}
 \defineukulelechord{Daug}{3,2,2,5}
 
 % D#
-\defineukulelechord[D\#dim]{Dsharpdim}{2,3,2,3}
 \defineukulelechord[D\#m]{Dsharpm}{3,3,2,1}
 \defineukulelechord[D\#m7]{Dsharpm7}{3,3,2,4}
+\defineukulelechord[D\#dim]{Dsharpdim}{2,3,2,3}
 
 % Eb
 \defineukulelechord{Eb}{0,3,3,1}
@@ -157,25 +160,25 @@
 
 % E
 \defineukulelechord{E}{4,4,4,2}
-\defineukulelechord{Em}{0,4,3,2}
-\defineukulelechord{Em7}{0,2,0,2}
 \defineukulelechord{E6}{4,4,4,4}
 \defineukulelechord{E7}{1,2,0,2}
 \defineukulelechord{E7sus4}{2,2,0,2}
+\defineukulelechord{Em}{0,4,3,2}
+\defineukulelechord{Em7}{0,2,0,2}
 \defineukulelechord{Edim}{0,1,0,1}
 
 % F
 \defineukulelechord{F}{2,0,1,0}
 \defineukulelechordfret{F}{F_fret5}{5}{5,5,5,8}
+\defineukulelechord{F/C}{2,0,1,3}
+\defineukulelechordfret{F6}{F6}{5}{5,5,5,5}
 \defineukulelechord{F7}{2,3,1,0}
 \defineukulelechord[F7]{F7_alt}{2,3,1,3}
 \defineukulelechordfret{Fmaj7}{Fmaj7_fret5}{5}{5,5,5,7}
-\defineukulelechordfret{F6}{F6}{5}{5,5,5,5}
 \defineukulelechord{F9}{0,3,1,0}
+\defineukulelechord{Fadd2}{0,0,1,0}
 \defineukulelechord{Fm}{1,0,1,3}
 \defineukulelechord{Fdim}{1,2,1,2}
-\defineukulelechord{Fadd2}{0,0,1,0}
-\defineukulelechord{F/C}{2,0,1,3}
 
 % F#
 \defineukulelechord[F\#]{Fsharp}{3,1,2,1}
@@ -189,16 +192,16 @@
 % G
 \defineukulelechord{G}{0,2,3,2}
 \defineukulelechord[G]{G_barre2}{4,2,3,2}
+\defineukulelechord{Gsus2}{0,2,3,0}
 \defineukulelechord{G5}{0,2,3,5}
 \defineukulelechord{G7}{0,2,1,2}
 \defineukulelechord{G9}{2,5,3,2}
 \defineukulelechord{Gm}{0,2,3,1}
-\defineukulelechord{Gm7}{0,2,1,1}
 \defineukulelechord{Gm6}{0,2,0,1}
-\defineukulelechord{Gm11}{3,5,3,3}
+\defineukulelechord{Gm7}{0,2,1,1}
 \defineukulelechord{Gmmaj7}{0,2,2,1}
-\defineukulelechord{Gsus2}{0,2,3,0}
+\defineukulelechord{Gm11}{3,5,3,3}
 
 % G#
-\defineukulelechord[G\#dim]{Gsharpdim}{1,2,1,2}
 \defineukulelechordfret{G\#m11}{Gsharpm11}{4}{4,6,4,4}
+\defineukulelechord[G\#dim]{Gsharpdim}{1,2,1,2}
