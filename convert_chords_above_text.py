@@ -84,7 +84,7 @@ def merge_lines(chord_line: str, lyrics_line: str):
             token_end += 1
 
         # Feature: Check whether after the first word letter
-        is_after_letter = len(lyrics_line) >= cpos and lyrics_line[cpos-1] != " "
+        is_after_letter = cpos >= 1 and len(lyrics_line) >= cpos and lyrics_line[cpos-1] != " "
         is_two_after_whitespace = cpos <= 1 or len(lyrics_line) <= cpos - 2 or lyrics_line[cpos - 2] == " "
         is_after_first_letter = is_after_letter and is_two_after_whitespace
         
