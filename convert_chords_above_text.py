@@ -3,6 +3,26 @@ from pathlib import Path
 import click
 import click_pathlib
 
+HEADER = """\\begin{song}
+
+\\SongTitle{Title}{Artist}
+
+\\begin{headerbox}
+\\RaiseBoxWithAccents
+\\beatsperchord3 \\quad
+\\textit{Original: +TODO} \\quad
+\\textit{Strum:} $\\Down\\Miss\\Down\\Up\\Miss\\Up\\Down\\Up$
+\\end{headerbox}
+
+\\begin{hchordbox}
+\\end{hchordbox}
+
+\\Large
+
+\\bigskip
+"""
+
+FOOTER = "\n\\end{song}"
 
 def flatten(t):
     return [item for sublist in t for item in sublist]
@@ -10,9 +30,9 @@ def flatten(t):
 
 def gen_all_chords() -> list[str]:
     # Does not need to be perfect
-    alpha = ["A", "B", "C", "D", "E", "F", "G"]
+    alpha = ["A", "B", "C", "D", "E", "F", "G", "H"]
     roots = flatten([[a, a+"b", a+"#"] for a in alpha])
-    triads = flatten([[r, r+"m", r+"dim", r+"aug"] for r in roots])
+    triads = flatten([[r, r+"m", r+"mi", r+"dim", r+"aug"] for r in roots])
     suffixes = ["", "7", "maj7", "sus2", "sus4", "7sus4", "6", "5", "9"]
     return [t+s for t in triads for s in suffixes]
 
@@ -27,6 +47,7 @@ ALL_CHORDS = gen_all_chords()
     help="Input text file with chords above lyrics format",
 )
 def main(song_text: Path) -> None:
+    print(HEADER)
     song_text_str = song_text.read_text()
     lines = song_text_str.split("\n") + [""]
     skip_line = False
@@ -50,7 +71,7 @@ def main(song_text: Path) -> None:
             output_line = line
 
         print(postprocess(line=output_line))
-
+    print(FOOTER)
 
 def is_chord_line(line: str) -> bool:
     # Returns true is at least 50% of tokens on a line are chords.
