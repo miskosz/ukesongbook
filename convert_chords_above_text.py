@@ -43,6 +43,7 @@ ALL_CHORDS = gen_all_chords()
 @click.option(
     "-i",
     "--song-text",
+    required=True,
     type=click_pathlib.Path(exists=True),
     help="Input text file with chords above lyrics format",
 )
