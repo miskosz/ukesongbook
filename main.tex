@@ -32,7 +32,10 @@
 \input{ukulelechords.tex}
 
 % Font
-\renewcommand{\familydefault}{\sfdefault}
+%\renewcommand{\familydefault}{\sfdefault}
+%\setmainfont{Calibri}
+%\setmainfont{Carlito}
+\setmainfont{Verdana}
 
 % Enable centered table cells with specified width
 \newcommand{\PreserveBackslash}[1]{\let\temp=\\#1\let\\=\temp}
@@ -46,8 +49,7 @@
 % Song environment
 \newenvironment{song}{%
 	\pagebreak%
-	\parindent0pt%
-    \large%
+	\parindent0pt%\large%
 }{%
 }%
 
@@ -104,11 +106,11 @@
 
 % Song header.
 % Params: title, author, [title size - default \Huge]
-\newcommand{\SongTitle}[3][\Huge]{%
+\newcommand{\SongTitle}[3][\huge]{%
 	\phantomsection%
 	\addcontentsline{toc}{subsection}{#2\ \ \textit{(#3)}}%
 	{\centering
-		#1 #2 \penalty-1{\Large (#3)}\par
+		#1 \textbf{#2} \penalty-1{\Large (#3)}\par
 		\medskip
 	}
 }
@@ -147,7 +149,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % STRUMMING
 
-\newcommand{\RaiseBoxWithAccents}{\vspace{-1ex}}
+\newcommand{\RaiseBoxWithAccents}{\vspace{-0.7ex}}
 \newcommand{\fixwidth}[2][7pt]{\hbox to#1{\hss$#2$\hss}}
 \newcommand{\rang}{\begin{picture}(5,7)
 \put(1.1,2.5){\rotatebox{135}{\line(1,0){3.0}}}
