@@ -7,6 +7,7 @@
 \usepackage[top=2cm,left=2cm,bottom=2cm,right=2cm,a4paper]{geometry}
 \usepackage{verbatim}                       % support for comment and verbatim
 \usepackage{graphicx}                       % support for images
+\usepackage{xcolor}							% support for colors
 \usepackage[hidelinks]{hyperref}            % hyperlink support
 \usepackage{etoolbox}                       % conditional statement support
 \usepackage{tikz}
@@ -88,7 +89,7 @@
 \NewEnviron{headerbox}{{\it\centering\BODY\par\vspace{0.5ex}}}%
 
 % Chordbox environment. Places chords in a float at the right side of the page.
-\newenvironment{chordbox}{%
+\newenvironment{vchordbox}{%
 	\wrapfloat{minipage}{r}{7.5ex}%
 	\vspace{-3ex}%
 }{%
@@ -114,12 +115,13 @@
 }
 
 % Remarks
-\newcommand{\note}[1]{\textbf{\textit{[#1]}}}
+\newcommand{\instruction}[1]{\textbf{\smaller\textit{[#1]}}\vspace{0.2ex}}
 \newcommand{\vocals}[1]{\textit{(#1)}}
 
 % Chord macros
 \newcommand{\ch}[1]{\textbf{(#1)}}
 \newcommand{\rep}[1]{\hspace{2pt}x#1}
+\newcommand{\early}{*}
 \newcommand{\beatsymbol}{\textquotesingle}
 \newcount\myloopcounter
 \newcommand{\beats}[1]{%
@@ -138,8 +140,8 @@
 % Tags
 \newcommand{\Refren}{\textbf{R{\smaller EFRÉN}}}
 \newcommand{\Chorus}{\textbf{C{\smaller HORUS}}}
-\newcommand{\Intro}{\textbf{I{\smaller NTRO}}}
-\newcommand{\Outro}{\textbf{O{\smaller UTRO}}}
+\newcommand{\Intro}{\textbf{I{\smaller NTRO}:\ }}
+\newcommand{\Outro}{\textbf{O{\smaller UTRO}:\ }}
 \newcommand{\PrechorusAndChorus}{\textbf{P{\smaller RE-CHORUS AND} C{\smaller HORUS}}}
 \newcommand{\PredrefrenARefren}{\textbf{P{\smaller REDREFRÉN A} R{\smaller EFRÉN}}}
 \newcommand{\Bridge}{\textbf{B{\smaller RIDGE}}}
