@@ -53,41 +53,21 @@
 }{%
 }%
 
-% Chorusbox environment. Makes a box around text, used mostly for choruses.
-% Takes one parameter, the text displayed at the top of the box.
-\newsavebox{\chbox}
-\newlength{\chboxsep}
-\setlength{\chboxsep}{1.5ex}
-\newlength{\savedfboxsep}
-\newenvironment{chorusbox}[1]{%
-    \hspace{-\chboxsep}%
-    \begin{lrbox}{\chbox}%
-    \begin{minipage}{\linewidth-3ex}%
-    #1\textbf{:} \par \smallskip
-}{%
-    \end{minipage}%
-    \end{lrbox}%
-    \setlength{\savedfboxsep}{\fboxsep}%
-    \setlength{\fboxsep}{\chboxsep}%
-    \fbox{\usebox{\chbox}}%
-    \setlength{\fboxsep}{\savedfboxsep}%
+% Song header.
+% Params: title, author, [title size - default \huge]
+\newcommand{\SongTitle}[3][\huge]{%
+	\phantomsection%
+	\addcontentsline{toc}{subsection}{#2\ \ \textit{(#3)}}%
+	{\centering
+		#1 \textbf{#2} \penalty-1{\Large (#3)}\par
+		\vspace{0.75ex}
+	}
 }
-\newenvironment{chorusboxwide}[1]{%
-    \hspace{-\chboxsep}%
-    \begin{lrbox}{\chbox}%
-    \begin{minipage}{\linewidth}%
-    #1\textbf{:} \par \smallskip
-}{%
-    \end{minipage}%
-    \end{lrbox}%
-    \setlength{\savedfboxsep}{\fboxsep}%
-    \setlength{\fboxsep}{\chboxsep}%
-    \fbox{\usebox{\chbox}}%
-    \setlength{\fboxsep}{\savedfboxsep}%
-}%
 
 % Headerbox.
 \NewEnviron{headerbox}{{\it\centering\BODY\par\vspace{0.5ex}}}%
+\newcommand{\RaiseBoxWithAccents}{\vspace{-1.6ex}}
+\newcommand{\RaiseBoxWithChucks}{\vspace{-1ex}}
 
 % Chordbox environment. Places chords in a float at the right side of the page.
 \newenvironment{vchordbox}{%
@@ -104,16 +84,38 @@
     \InsertBoxR{0}{{\vrule height 2.5ex depth 0pt width 0pt}\BODY}%
 }%
 
-% Song header.
-% Params: title, author, [title size - default \huge]
-\newcommand{\SongTitle}[3][\huge]{%
-	\phantomsection%
-	\addcontentsline{toc}{subsection}{#2\ \ \textit{(#3)}}%
-	{\centering
-		#1 \textbf{#2} \penalty-1{\Large (#3)}\par
-		\vspace{1ex}
-	}
+% Chorusbox environment. Makes a box around text, used mostly for choruses.
+% Takes one parameter, the text displayed at the top of the box.
+\newsavebox{\chbox}
+\newlength{\chboxsep}
+\setlength{\chboxsep}{1.5ex}
+\newlength{\savedfboxsep}
+\newenvironment{chorusbox}[1]{%
+	\hspace{-\chboxsep}%
+	\begin{lrbox}{\chbox}%
+		\begin{minipage}{\linewidth-3ex}%
+			#1\textbf{:} \par \smallskip
+		}{%
+		\end{minipage}%
+	\end{lrbox}%
+	\setlength{\savedfboxsep}{\fboxsep}%
+	\setlength{\fboxsep}{\chboxsep}%
+	\fbox{\usebox{\chbox}}%
+	\setlength{\fboxsep}{\savedfboxsep}%
 }
+\newenvironment{chorusboxwide}[1]{%
+	\hspace{-\chboxsep}%
+	\begin{lrbox}{\chbox}%
+		\begin{minipage}{\linewidth}%
+			#1\textbf{:} \par \smallskip
+		}{%
+		\end{minipage}%
+	\end{lrbox}%
+	\setlength{\savedfboxsep}{\fboxsep}%
+	\setlength{\fboxsep}{\chboxsep}%
+	\fbox{\usebox{\chbox}}%
+	\setlength{\fboxsep}{\savedfboxsep}%
+}%
 
 % Remarks
 \newcommand{\instruction}[1]{\textbf{\smaller\textit{[#1]}}\vspace{0.2ex}}
@@ -151,8 +153,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % STRUMMING
 
-\newcommand{\RaiseBoxWithAccents}{\vspace{-2ex}}
-\newcommand{\RaiseBoxWithChucks}{\vspace{-1ex}}
 \newcommand{\fixwidth}[2][7pt]{\hbox to#1{\hss$#2$\hss}}
 \newcommand{\rang}{\begin{picture}(5,7)
 \put(1.1,2.5){\rotatebox{135}{\line(1,0){3.0}}}
