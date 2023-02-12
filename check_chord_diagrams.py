@@ -77,17 +77,17 @@ def check_file(song_file_str: str, print_tex_code: bool) -> str:
     diagrams_sort = sorted(diagrams, key=chord_sort_key)
 
     # Between curly brackets in \ch{...}, take all alphanum+ characters from
-    # the beginning, after an optional star. This is to exclude \rep, \beats
+    # the beginning, after an optional \early. This is to exclude \rep, \beats
     # or other special instructions inside. Besides alphanum, also include:
     # - '.' to handle "N.C."
     # - '/' to handle slash chords
     # - '-' to handle e.g. (Am-G-F)
     used_chords_plus = re.findall(
-        r"\\ch\{\*?([\w\./-]+)[^\}]*\}",
+        r"\\ch\{(\\early )?([\w\./-]+)[^\}]*\}",
         tex_code,
         re.DOTALL | re.UNICODE,
     )
-    used_chords = flatten([x.split('-') for x in used_chords_plus])
+    used_chords = flatten([x[1].split('-') for x in used_chords_plus])
 
     # Sort and make unique. Remove "N.C."
     used_chords_uniq_sort = sorted(
