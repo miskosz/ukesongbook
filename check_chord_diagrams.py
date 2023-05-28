@@ -35,7 +35,7 @@ ignored_files = [
 )
 def main(song_dir: Path, report_ignored: bool, print_tex_code: bool) -> None:
     num_warn_files = 0
-    for song_filename in song_dir.glob("*.tex"):
+    for song_filename in sorted(song_dir.glob("*.tex")):
         # Run chord parsing also for ignored files.
         song_file_str = song_filename.read_text()
         warn_message = check_file(song_file_str, print_tex_code)
