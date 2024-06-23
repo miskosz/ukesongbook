@@ -33,8 +33,8 @@ def gen_all_chords() -> list[str]:
     alpha = ["A", "B", "C", "D", "E", "F", "G", "H"]
     roots = flatten([[a, a+"b", a+"#"] for a in alpha])
     triads = flatten([[r, r+"m", r+"mi", r+"dim", r+"aug"] for r in roots])
-    suffixes = ["", "7", "maj7", "sus2", "sus4", "7sus4", "6", "5", "9"]
-    slash = ["", "/A", "/B", "/C", "/D", "/E", "/F", "/G", "/H"]
+    suffixes = ["", "7", "maj7", "sus2", "sus4", "7sus4", "6", "5", "9", "7b5"]
+    slash = [""] + flatten(["/"+a, "/"+a+"b", "/"+a+"#"] for a in alpha)
     return [t+s+l for t in triads for s in suffixes for l in slash]
 
 
