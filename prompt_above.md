@@ -29,15 +29,19 @@ Happy \ch{G}birthday \ch{D}to \ch{G}you \par
 \end{song}
 ```
 
-Please help me write the song file. Below is a text with chords for a song. The chord notation is on every other line above the text. The whitespace matters, the chord position is above the place where it is played. Please wrap each occurrence of a chord with \ch{...} and move it inline. For example,
+Please help me write the song file. Below is a text with chords for a song. The chord notation is on every other line above the text. Wrap each chord in `\ch{...}` and insert it in the text just before the word it is written above - the exact position
+matters. For example,
 
 ```
     C                    F
 She asked me, "Son, when I grow old,
+     Am           G
+Will you buy me a house of gold?
 ```
 becomes
 ```
 She \ch{C}asked me, "Son, when \ch{F}I grow old, \par
+Will \ch{Am}you buy me a \ch{G}house of gold? \par
 ```
 
 

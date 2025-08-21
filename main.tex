@@ -28,6 +28,7 @@
 \input{insbox}								% float for strumbox
 \usepackage[stamp]{draftwatermark}			% disable: nostamp
 \usepackage{framed}			% debug frames
+\usepackage{qrcode}
 
 \input{ukulelechords.tex}
 
@@ -79,7 +80,7 @@
 
 % Strumbox.
 \NewEnviron{strumbox}{%
-    \InsertBoxR{0}{{\vrule height 2.5ex depth 0pt width 0pt}\BODY}%
+	\InsertBoxR{0}{{\vrule height 2.5ex depth 0pt width 0pt}\BODY}%
 }%
 
 % Chorusbox environment. Makes a box around text, used mostly for choruses.
@@ -175,7 +176,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % VERSION
 \renewcommand{\dateseparator}{-}
-\newcommand{\songbookversion}{v0.6.\today}
+\newcommand{\songbookversion}{v0.7.\today}
 \SetWatermarkText{Beta \songbookversion}
 \SetWatermarkColor[gray]{0.5}
 \SetWatermarkFontSize{0.4cm}
@@ -195,20 +196,25 @@
 	\begin{center}
 		\vspace*{1cm}
 
-		\vspace{6cm}
+		\vspace{4cm}
 
 		\includegraphics[width=0.5\textwidth]{title.png}
 
-		\vspace{6cm}
+		\vspace{3cm}
 
-		\it
-		\LARGE
-		www.ukulelespevnik.sk
+		\LARGE uke.sk
 
-		\vspace{1cm}
+		\vspace{0.5cm}
 
-		\Large
-		Beta \songbookversion
+		\LARGE ukulelespevnik.sk
+
+		\vspace{2cm}
+
+		\qrcode[hyperlink,height=3.5cm]{uke.sk}
+
+		\vspace{2cm}
+
+		\Large Beta \songbookversion
 
 	\end{center}
 \end{titlepage}
