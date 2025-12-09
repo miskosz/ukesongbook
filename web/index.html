@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="sk">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <title>Citrónový ukulele spevník | Akordy a texty piesní pre ukulele</title>
 
-  <meta name="description" content="Stiahnite si zadarmo Citrónový ukulele spevník. Obsahuje akordy a texty pre slovenské, české a zahraničné piesne. Vhodné pre začiatočníkov aj pokročilých.">
+  <meta name="description"
+    content="Stiahnite si zadarmo Citrónový ukulele spevník. Obsahuje akordy a texty pre slovenské, české a zahraničné piesne. Vhodné pre začiatočníkov aj pokročilých.">
   <meta name="keywords" content="ukulele, spevník, akordy, citrónový, zpěvník, piesne, texty, PDF, download">
   <meta name="author" content="Michal Szabados">
 
@@ -38,25 +40,53 @@
   </script>
 
   <style>
-  .my-hover-green:hover {
-    color: #fff !important;
-    background-color: #449d48 !important;
-  }
-  /* Custom class to visually hide text for SEO/Accessibility */
-  .sr-only {
-    position: absolute !important;
-    width: 1px !important;
-    height: 1px !important;
-    padding: 0 !important;
-    margin: -1px !important;
-    overflow: hidden !important;
-    clip: rect(0, 0, 0, 0) !important;
-    white-space: nowrap !important;
-    border: 0 !important;
-  }
+    .my-hover-green:hover {
+      color: #fff !important;
+      background-color: #449d48 !important;
+    }
 
+    /* Custom class to visually hide text for SEO/Accessibility */
+    .sr-only {
+      position: absolute !important;
+      width: 1px !important;
+      height: 1px !important;
+      padding: 0 !important;
+      margin: -1px !important;
+      overflow: hidden !important;
+      clip: rect(0, 0, 0, 0) !important;
+      white-space: nowrap !important;
+      border: 0 !important;
+    }
+
+    .song-columns {
+      column-count: 2;
+      column-gap: 40px;
+      /* Prevents list items from breaking across columns */
+      -webkit-column-break-inside: avoid;
+      break-inside: avoid;
+    }
+
+    /* Ensure the list style is removed for a cleaner look */
+    .song-columns ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .song-columns li {
+      position: relative;
+      padding-left: 28px !important;
+      margin-bottom: 5px;
+    }
+
+    .song-columns li::before {
+      content: '🍋';
+      position: absolute;
+      left: 0;
+    }
   </style>
 </head>
+
 <body>
 
   <!-- Page content -->
@@ -64,25 +94,19 @@
 
     <!-- Image -->
     <header>
-        <h1 class="w3-center w3-margin-bottom">
-            <img
-              src="title.png"
-              alt="Citrónový ukulele spevník | Citrónový ukulele zpěvník"
-              class="w3-image"
-              style="max-height: 240px; width:auto;"
-            >
-            <span class="sr-only">Citrónový ukulele spevník | Citrónový ukulele zpěvník</span>
-        </h1>
+      <h1 class="w3-center w3-margin-bottom">
+        <img src="title.png" alt="Citrónový ukulele spevník | Citrónový ukulele zpěvník" class="w3-image"
+          style="max-height: 240px; width:auto;">
+        <span class="sr-only">Citrónový ukulele spevník | Citrónový ukulele zpěvník</span>
+      </h1>
 
-        <!-- <p class="w3-large w3-text-grey">Váš sprievodca svetom ukulele akordov a piesní.</p> -->
+      <!-- <p class="w3-large w3-text-grey">Váš sprievodca svetom ukulele akordov a piesní.</p> -->
     </header>
 
     <!-- Download button -->
     <div class="w3-padding-32">
-      <a
-        href="ukulelespevnik_beta_v0.7.2025-08-28.pdf"
-        class="w3-button w3-green my-hover-green w3-ripple w3-round w3-padding-large w3-xlarge"
-      >
+      <a href="ukulelespevnik_beta_v0.7.2025-08-28.pdf"
+        class="w3-button w3-green my-hover-green w3-ripple w3-round w3-padding-large w3-xlarge">
         Stiahnuť PDF
       </a>
     </div>
@@ -90,52 +114,41 @@
     <!-- Version info -->
     <div class="w3-small" style="color:#bbb">Verzia: beta_v0.7.2025-08-28</div>
 
-<main>
-    <div class="w3-container w3-padding-32 w3-margin-top" style="max-width: 700px; margin: auto;">
+    <main>
+      <div class="w3-container w3-padding-32 w3-margin-top" style="max-width: 800px; margin: auto;">
 
         <div class="w3-left-align w3-padding-large">
-            <h2 class="w3-text-dark-grey w3-border-bottom w3-padding-small">O Spevníku</h2>
-            <p>
-                Tento **ukulele spevník (zpěvník)** vznikol z lásky k hudbe a malému nástroju so štyrmi strunami. 
-                Je navrhnutý pre **začiatočníkov aj pokročilých** hráčov.
-            </p>
-            <p>
-                Nájdete v ňom výber populárnych **slovenských, českých a zahraničných hitov** upravených pre ukulele. Každá pieseň obsahuje kompletný text a prehľadné akordové značky, vďaka čomu si ich ľahko zahráte.
-            </p>
+          <h2 class="w3-text-dark-grey w3-border-bottom w3-padding-small">O Spevníku</h2>
+          <p>
+            Citrónový ukulele spevník je určený pre všetkých nadšencov ukulele - pre začiatočníkov aj pokročilých.
+            Obsahuje piesne upravené tak, aby boli ľahko hrateľné na ukulele. Každá pieseň je na jednej stránke,
+            obsahuje diagramy akordov, rytmický vzor, a akordy sú uvedené v celom texte piesne.
+          </p>
+          <p>
+            Deväť z desiatich doktorov odporúča hrať zo spevníku v spoločnosti ďalších ukulelistov.
+          </p>
         </div>
 
         <div class="w3-left-align w3-padding-large w3-light-grey w3-round-large w3-margin-top">
-            <h3 class="w3-text-green w3-border-bottom w3-padding-small">🎵 Zoznam piesní (Long-Tail SEO)</h3>
-            
-            <p class="w3-small w3-text-gray">
-                Tieto kľúčové slová pomáhajú nájsť spevník pri hľadaní konkrétnych skladieb.
-            </p>
+          <h2 class="w3-border-bottom w3-padding-small">Zoznam piesní</h2>
 
-            <div class="w3-row">
-                <div class="w3-col l6 m6 w3-padding-small">
-                    <ul class="w3-ul w3-border-0">
-                        <li>✅ Over the Rainbow</li>
-                        <li>✅ Prší, prší</li>
-                        <li>✅ Hallelujah (Leonard Cohen)</li>
-                        <li>✅ V dolinách</li>
-                        <li>✅ Cesta (Kryštof)</li>
-                        <li>✅ (Doplňte ďalšie piesne...)</li>
-                    </ul>
-                </div>
-                <div class="w3-col l6 m6 w3-padding-small">
-                    <ul class="w3-ul w3-border-0">
-                        <li>✅ Stánky (Nedvěd)</li>
-                        <li>✅ Čerešne</li>
-                        <li>✅ Tichá noc (Vianočná)</li>
-                        <li>✅ Dnes je skvelý deň</li>
-                        <li>✅ Zuzana (The Beatles)</li>
-                        <li>✅ (Doplňte ďalšie piesne...)</li>
-                    </ul>
-                </div>
-            </div>
+          <ul class="song-columns w3-ul w3-border-0" id="song-list-container">
+            <li>Over the Rainbow</li>
+            <li>Prší, prší</li>
+            <li>Hallelujah (Leonard Cohen) Hallelujah (Leonard Cohen)</li>
+            <li>V dolinách</li>
+            <li>Cesta (Kryštof)</li>
+            <li>Stánky (Nedvěd)</li>
+            <li>Čerešne</li>
+            <li>Tichá noc (Vianočná)</li>
+            <li>Dnes je skvelý deň</li>
+            <li>Zuzana (The Beatles)</li>
+            <li>(Doplňte ďalšie piesne...)</li>
+          </ul>
         </div>
-    </div>
-</main>
+
+
+    </main>
 
     <div class="w3-padding-64 w3-padding-xxlarge"></div>
 
@@ -149,4 +162,5 @@
   </div>
 
 </body>
+
 </html>
