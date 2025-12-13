@@ -16,8 +16,12 @@
   <meta property="og:type" content="book">
   <meta property="og:title" content="Citrónový ukulele spevník | Akordy a texty piesní pre ukulele">
   <meta property="og:description" content="Ukulele akordy pre výber slovenských, českých a zahraničných piesní.">
-  <meta property="og:image" content="title.png">
   <meta property="og:url" content="https://ukulelespevnik.sk">
+
+  <meta property="og:image" content="https://ukulelespevnik.sk/social_preview.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="670">
+  <meta property="og:image:type" content="image/png">
 
   <link rel="canonical" href="https://ukulelespevnik.sk/">
   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -64,6 +68,13 @@
       /* Prevents list items from breaking across columns */
       -webkit-column-break-inside: avoid;
       break-inside: avoid;
+    }
+
+    /* Single column on narrow views */
+    @media (max-width: 768px) {
+      .song-columns {
+        column-count: 1;
+      }
     }
 
     /* Ensure the list style is removed for a cleaner look */
